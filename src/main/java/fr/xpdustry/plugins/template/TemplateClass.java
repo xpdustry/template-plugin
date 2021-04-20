@@ -1,10 +1,10 @@
 package fr.xpdustry.plugins.template;
 
-import arc.util.*;
+import arc.util.CommandHandler;
 
-import mindustry.gen.*;
 import mindustry.mod.Plugin;
 
+@SuppressWarnings("unused")
 public class TemplateClass extends Plugin{
 
     @Override
@@ -12,12 +12,10 @@ public class TemplateClass extends Plugin{
         //called when game initializes
     }
 
-
     @Override
     public void registerServerCommands(CommandHandler handler){
         //register commands that run on the server
     }
-
 
     @Override
     public void registerClientCommands(CommandHandler handler){
