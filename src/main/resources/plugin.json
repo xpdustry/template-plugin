@@ -1,0 +1,7 @@
+{
+  "name": "TemplatePlugin",
+  "author": "Phinner",
+  "main": "fr.xpdustry.plugins.template.TemplateClass",
+  "description": "Template plugin, enjoy.",
+  "version": 1.0
+}
