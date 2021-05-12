@@ -12,6 +12,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 14
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
       - name: Build plugin jar
         run: ./gradlew jar
       - name: Upload built jar file
