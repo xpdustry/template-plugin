@@ -1,7 +1,7 @@
 {
   "name": "TemplatePlugin",
   "author": "Phinner",
-  "main": "fr.xpdustry.plugins.template.TemplateClass",
-  "description": "Template plugin, enjoy.",
+  "main": "fr.xpdustry.templates.TemplatePlugin",
+  "description": "Mindustry template plugin, enjoy.",
   "version": 1.0
 }

@@ -1,10 +1,10 @@
-package fr.xpdustry.plugins.template;
+package fr.xpdustry.templates;
 
 import arc.util.CommandHandler;
 import mindustry.mod.Plugin;
 
 @SuppressWarnings("unused")  // <- Only used for this template so IntelliJ stop screaming at me...
-public class TemplateClass extends Plugin{
+public class TemplatePlugin extends Plugin{
 
     @Override
     public void init(){
