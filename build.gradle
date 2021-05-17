@@ -1,9 +1,8 @@
 plugins{
-    id 'java'
+    id "java"
 }
 
-group 'fr.xpdustry'
-version '1.0'
+group "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
 
 sourceCompatibility = 1.8
@@ -11,12 +10,14 @@ targetCompatibility = 14
 
 repositories{
     mavenCentral()
-    maven{ url 'https://www.jitpack.io' }
+    maven{ url "https://www.jitpack.io" }
 }
 
 ext{
     //the build number that this plugin is made for
-    mindustryVersion = 'v126.2'
+    mindustryVersion = "v126.2"
+    // A string that points directly to your server.jar directory
+    serverDirectory = "C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
 }
 
 dependencies{
@@ -31,17 +32,17 @@ jar{
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
-    from('src/main/resources'){
+    from("src/main/resources"){
         include "*"
     }
 }
 
 task deployPlugin(type:Exec){
-    // A string that points directly to your server.jar directory
-    def serverDirectory = "C:\\Users\\Finley\\Documents\\My Games\\Mindustry\\Server\\mindustry-server v126.2"
-    
     // Delete the old jar
     delete "$serverDirectory/config/mods/${rootProject.name}.jar"
+
+    // If it don't delete corectly, uncomment the following string
+    // Thread.sleep(1000)
 
     // Copy the jar to the server.jar directory
     copy {
@@ -51,5 +52,6 @@ task deployPlugin(type:Exec){
 
     // Change the cwd and run
     workingDir = file(serverDirectory)
+    // I recommend you to add a exit at the end of run_server.bat so you won't have to type it twice
     commandLine = ["cmd", "/C", "start", "run_server.bat"]
 }
