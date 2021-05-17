@@ -17,7 +17,7 @@ ext{
     //the build number that this plugin is made for
     mindustryVersion = "v126.2"
     // A string that points directly to your server.jar directory
-    serverDirectory = "C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
+    serverDirectory = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
 }
 
 dependencies{
