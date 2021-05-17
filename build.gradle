@@ -38,7 +38,7 @@ jar{
 
 task deployPlugin(type:Exec){
     // A string that points directly to your server.jar directory
-    serverDirectory = "C:\\Users\\Finley\\Documents\\My Games\\Mindustry\\Server\\mindustry-server v126.2"
+    def serverDirectory = "C:\\Users\\Finley\\Documents\\My Games\\Mindustry\\Server\\mindustry-server v126.2"
     
     // Delete the old jar
     delete "$serverDirectory/config/mods/${rootProject.name}.jar"
