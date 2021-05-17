@@ -6,18 +6,26 @@ import mindustry.mod.Plugin;
 @SuppressWarnings("unused")  // <- Only used for this template so IntelliJ stop screaming at me...
 public class TemplatePlugin extends Plugin{
 
+    /**
+     * This method is called when game initializes.
+     */
     @Override
     public void init(){
-        //called when game initializes
     }
 
+    /**
+     * This method is called when the game register the server-side commands.
+     * Make sure your plugin don't load the commands twice by adding a simple boolean check.
+     */
     @Override
     public void registerServerCommands(CommandHandler handler){
-        //register commands that run on the server
     }
 
+    /**
+     * This method is called when the game register the client-side commands.
+     * Make sure your plugin don't load the commands twice by adding a simple boolean check.
+     */
     @Override
     public void registerClientCommands(CommandHandler handler){
-        //register commands that player can invoke in-game
     }
 }

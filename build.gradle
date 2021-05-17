@@ -17,6 +17,8 @@ repositories{
 ext{
     //the build number that this plugin is made for
     mindustryVersion = 'v126.2'
+    // A string that points directly to your server.jar directory
+    serverDirectory = "C:\\Users\\Finley\\Documents\\My Games\\Mindustry\\Server\\mindustry-server v126.2"
 }
 
 dependencies{
@@ -36,3 +38,17 @@ jar{
     }
 }
 
+task deployPlugin(type:Exec){
+    // Delete the old jar
+    delete "$serverDirectory/config/mods/${rootProject.name}.jar"
+
+    // Copy the jar to the server.jar directory
+    copy {
+        from "build/libs/${rootProject.name}.jar"
+        into "$serverDirectory/config/mods"
+    }
+
+    // Change the cwd and run
+    workingDir = file(serverDirectory)
+    commandLine = ["cmd", "/C", "start", "run_server.bat"]
+}
