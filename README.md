@@ -1,5 +1,7 @@
 # TemplatePlugin
  
-stolen from **Anuken/ExamplePlugin** lol
+Template stolen from **Anuken/ExamplePlugin**.
 
-_The plugins can be used with jitpack so you don't have to download the them manually..._
+This template also features some cool stuff such as:
+- [Jitpack](https://jitpack.io/) support
+- Gradle Task for testing
