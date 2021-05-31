@@ -38,21 +38,21 @@ jar{
     }
 }
 
-task deployPlugin(type:Exec){
-    // Delete the old jar
-    delete "$serverDirectory/config/mods/${rootProject.name}.jar"
+task deployPlugin{
+    dependsOn build
 
-    // If it don't delete corectly, uncomment the following string
-    // Thread.sleep(1000)
+    doLast{
+        // Copy the jar to the server.jar directory
+        copy{
+            from "build/libs/${rootProject.name}.jar"
+            into "$serverDirectory/config/mods"
+        }
 
-    // Copy the jar to the server.jar directory
-    copy {
-        from "build/libs/${rootProject.name}.jar"
-        into "$serverDirectory/config/mods"
+        exec{
+            // Change the cwd and run
+            workingDir = file(serverDirectory)
+            // I recommend you to add a exit at the end of run_server.bat so you won't have to type it twice
+            commandLine = ["cmd", "/C", "start", "run_server.bat"]
+        }
     }
-
-    // Change the cwd and run
-    workingDir = file(serverDirectory)
-    // I recommend you to add a exit at the end of run_server.bat so you won't have to type it twice
-    commandLine = ["cmd", "/C", "start", "run_server.bat"]
 }
