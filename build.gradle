@@ -2,57 +2,57 @@ plugins{
     id "java"
 }
 
-group "fr.xpdustry"
+
+group = "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
 
 sourceCompatibility = 1.8
 targetCompatibility = 14
+
 
 repositories{
     mavenCentral()
     maven{ url "https://www.jitpack.io" }
 }
 
+
 ext{
     //the build number that this plugin is made for
     mindustryVersion = "v126.2"
     // A string that points directly to your server.jar directory,
     // the file:// at the beginning is required if you don't want github actions to scream at you
-    serverDirectory = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
+    serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
 }
+
 
 dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 }
 
+
 jar{
-    archiveFileName = "${project.archivesBaseName}.jar"
-
-    from{
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-
-    from("src/main/resources"){
-        include "*"
-    }
+    // The following line is required
+    from configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    from "plugin.json"
 }
 
-task deployPlugin{
+
+task install(type: Copy){
     dependsOn build
+    destinationDir = file("$serverDirectoryPath/config/mods")
+    from "build/libs/${rootProject.name}.jar"
+}
 
-    doLast{
-        // Copy the jar to the server.jar directory
-        copy{
-            from "build/libs/${rootProject.name}.jar"
-            into "$serverDirectory/config/mods"
-        }
 
-        exec{
-            // Change the cwd and run
-            workingDir = file(serverDirectory)
-            // I recommend you to add a exit at the end of run_server.bat so you won't have to type it twice
-            commandLine = ["cmd", "/C", "start", "run_server.bat"]
-        }
-    }
+task run(type: Exec){
+    // Change the cwd and run
+    workingDir = file(serverDirectoryPath)
+    commandLine = ["cmd", "/C", "start", "run_server.bat"]
+}
+
+
+task deploy{
+    dependsOn install
+    dependsOn run
 }

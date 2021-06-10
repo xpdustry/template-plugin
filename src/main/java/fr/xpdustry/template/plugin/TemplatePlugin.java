@@ -1,7 +1,9 @@
-package fr.xpdustry.templates;
+package fr.xpdustry.template.plugin;
 
 import arc.util.CommandHandler;
 import mindustry.mod.Plugin;
+
+import static arc.util.Log.info;
 
 @SuppressWarnings("unused")  // <- Only used for this template so IntelliJ stop screaming at me...
 public class TemplatePlugin extends Plugin{
@@ -11,6 +13,7 @@ public class TemplatePlugin extends Plugin{
      */
     @Override
     public void init(){
+        info("Bonjour !");
     }
 
     /**
