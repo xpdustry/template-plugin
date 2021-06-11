@@ -56,3 +56,9 @@ task deploy{
     dependsOn install
     dependsOn run
 }
+
+
+// Required if you want to use the Auto-Release GitHub action,
+task printArtifact{
+    println jar.archiveFileName.get()
+}
