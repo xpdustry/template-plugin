@@ -24,15 +24,15 @@ jobs:
       - name: Get the release number
         id: release_tag
         run: |
-          tag=$(cat plugin.json)                         # Set the release tag# Read plugin.json
-          tag=$(echo $tag | grep "version*")             # Cut the line with the version
+          tag=$(cat plugin.json | grep "version*")       # Cut the line with the version in plugin.json
           tag=$(echo $tag | cut -d ":" -f 2,3)           # Split with ":" and take the version number
           tag=$(echo $tag | tr -d \"," ")                # Trim the " and , and spaces
-          echo "RELEASE_TAG=$tag" >> $GITHUB_ENV         # Set the environment variable
+          echo '::set-output name=RELEASE_TAG::$tag'     # Set the environment variable
+          echo $tag
 
       - name: Upload artifacts
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: build/libs/*.jar
-          tag: ${{ env.RELEASE_TAG }} # <--- Use environment variables that was created earlier
+          tag: ${{ steps.release_tag.outputs.RELEASE_TAG }} # <--- Use environment variables that was created earlier
