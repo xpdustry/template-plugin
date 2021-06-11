@@ -52,6 +52,7 @@ task run(type: Exec){
 }
 
 
+
 task deploy{
     dependsOn install
     dependsOn run
@@ -59,6 +60,6 @@ task deploy{
 
 
 // Required if you want to use the Auto-Release GitHub action,
-task printArtifact{
-    println jar.archiveFileName.get()
+task getArtifactPath{
+    println jar.archiveFile.get().asFile.absolutePath
 }
