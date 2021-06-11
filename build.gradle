@@ -1,7 +1,4 @@
-plugins{
-    id "java"
-}
-
+apply plugin: "java"
 
 group = "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
@@ -9,11 +6,8 @@ sourceSets.main.java.srcDirs = ["src/main/java"]
 sourceCompatibility = 1.8
 targetCompatibility = 14
 
-
-repositories{
-    mavenCentral()
-    maven{ url "https://www.jitpack.io" }
-}
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding = "UTF-8"
 
 
 ext{
@@ -24,12 +18,15 @@ ext{
     serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
 }
 
+repositories{
+    mavenCentral()
+    maven{ url "https://www.jitpack.io" }
+}
 
 dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
 }
-
 
 jar{
     // The following line is required
@@ -41,23 +38,20 @@ jar{
 task install(type: Copy){
     dependsOn build
     destinationDir = file("$serverDirectoryPath/config/mods")
-    from "build/libs/${rootProject.name}.jar"
+    from "build/libs/${jar.archiveFileName.get()}"
 }
 
 
 task run(type: Exec){
-    // Change the cwd and run
     workingDir = file(serverDirectoryPath)
     commandLine = ["cmd", "/C", "start", "run_server.bat"]
 }
-
 
 
 task deploy{
     dependsOn install
     dependsOn run
 }
-
 
 // Required if you want to use the Auto-Release GitHub action,
 task getArtifactPath{
