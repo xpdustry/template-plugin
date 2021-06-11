@@ -8,6 +8,8 @@ This template also features some cool stuff such as:
   - `gradlew install` Move the output jar to your server mod directory
   - `gradlew run` Start the server in a new cmd
   - `gradlew deploy` Executes `install` and `run`
+- GitHub action for easier release and Jitpack usage
+   - You just have to run the `Release` workflow manually, it will automatically take the plugin version in your plugin.json file and upload the jar
     
 For faster testing, I recommend you to add an exit statement at the end of your `run_server.bat` such as:
 
