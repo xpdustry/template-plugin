@@ -4,7 +4,7 @@ group = "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
 
 sourceCompatibility = 1.8
-targetCompatibility = 14
+targetCompatibility = 16
 
 compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding = "UTF-8"
