@@ -1,6 +1,5 @@
 apply plugin: "java"
 
-
 group = "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
 
@@ -10,6 +9,7 @@ ext{
     mindustryVersion = "v126.2"
 
     // A string that points directly to your server.jar directory
+    // the below line is just a way to remind to avoid executing random stuff on your computer
     // the file:// at the beginning is required if you don't want github actions to scream at you
     if(System.getProperty("user.name") == "Finley"){
         serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
@@ -18,12 +18,10 @@ ext{
     }
 }
 
-
 repositories{
     mavenCentral()
     maven{ url "https://www.jitpack.io" }
 }
-
 
 dependencies{
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
@@ -37,11 +35,9 @@ compileJava{
     options.encoding = "UTF-8"
 }
 
-
 compileTestJava{
     options.encoding = "UTF-8"
 }
-
 
 jar{
     // The following line is required
@@ -53,34 +49,42 @@ jar{
 }
 
 
-task install(type: Copy){
-    if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
-        throw new GradleException("serverDirectoryPath is unset")
-    }
-
+task install{
     dependsOn jar
-    destinationDir = file("$serverDirectoryPath/config/mods")
-    from "$buildDir/libs/${jar.archiveFileName.get()}"
-}
 
+    doLast{
+        if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
+            throw new GradleException("serverDirectoryPath is unset")
+        }
 
-task run(type: Exec){
-    if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
-        throw new GradleException("serverDirectoryPath is unset")
+        copy{
+            from jar.archiveFile.get()
+            into file("$serverDirectoryPath/config/mods")
+        }
     }
-
-    workingDir = file(serverDirectoryPath)
-    commandLine = ["cmd", "/C", "start", "run_server.bat"]
 }
 
+task run{
+    doLast{
+        if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
+            throw new GradleException("serverDirectoryPath is unset")
+        }
+
+        exec{
+            workingDir = file(serverDirectoryPath)
+            commandLine = ["cmd", "/C", "start", "run_server.bat"]
+        }
+    }
+}
 
 task deploy{
     dependsOn install
     dependsOn run
 }
 
-
 // Required if you want to use the Release GitHub action,
 task getArtifactPath{
-    println jar.archiveFile.get().asFile.absolutePath
+    doLast{
+        println jar.archiveFile.get().toString()
+    }
 }
