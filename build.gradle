@@ -1,4 +1,8 @@
-apply plugin: "java"
+plugins{
+    id "java"
+    id "maven-publish"
+}
+
 
 group = "fr.xpdustry"
 sourceSets.main.java.srcDirs = ["src/main/java"]
@@ -49,7 +53,7 @@ jar{
 }
 
 
-task install{
+task moveJar{
     dependsOn jar
 
     doLast{
@@ -64,7 +68,7 @@ task install{
     }
 }
 
-task run{
+task runServer{
     doLast{
         if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
             throw new GradleException("serverDirectoryPath is unset")
@@ -78,8 +82,8 @@ task run{
 }
 
 task deploy{
-    dependsOn install
-    dependsOn run
+    dependsOn moveJar
+    dependsOn runServer
 }
 
 // Required if you want to use the Release GitHub action,
