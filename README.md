@@ -1,5 +1,7 @@
 # TemplatePlugin
 
+[![](https://jitpack.io/v/fr.xpdustry/TemplatePlugin.svg)](https://jitpack.io/#fr.xpdustry/TemplatePlugin)
+
 ## Description
 
 Template stolen from **Anuken/ExamplePlugin** lol...
