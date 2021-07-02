@@ -9,7 +9,7 @@ This template features some cool stuff such as:
 - Gradle tasks for testing:
   - `gradlew moveJar` Move the output jar to your server mod directory.
   - `gradlew runServer` Start the server in a new cmd.
-  - `gradlew deploy` Executes `moveJar` and `runServer`.
+  - `gradlew deployJar` Executes `moveJar` and `runServer`.
 - GitHub action for easier release and Jitpack usage:
    - You just have to run the `Release` workflow manually,
      it will automatically take the plugin version in your plugin.json file and upload the jar.

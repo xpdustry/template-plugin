@@ -110,7 +110,7 @@ task runServer{
     }
 }
 
-task deploy{
+task deployJar{
     dependsOn moveJar
     dependsOn runServer
 }
