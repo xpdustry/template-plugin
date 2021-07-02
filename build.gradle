@@ -1,22 +1,45 @@
-apply plugin: "java"
-
-group = "fr.xpdustry"
-sourceSets.main.java.srcDirs = ["src/main/java"]
+import groovy.json.JsonSlurper
+import org.gradle.internal.os.OperatingSystem
 
 
-ext{
-    // The build number that this plugin is made for
-    mindustryVersion = "v126.2"
+buildscript{
+    ext{
+        // Mindustry API version you want to use
+        mindustryVersion = "v126.2"
 
-    // A string that points directly to your server.jar directory
-    // the below line is just a way to remind to avoid executing random stuff on your computer
-    // the file:// at the beginning is required if you don't want github actions to scream at you
-    if(System.getProperty("user.name") == "Finley"){
-        serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server v126.2"
-    }else{
-        serverDirectoryPath = ""
+        // Plugin metadata extracted from plugin.json
+        metadata = new JsonSlurper().parseText(file("$rootDir/plugin.json").text)
+
+        // A string that points directly to your server.jar directory
+        serverDirectoryPath = null
+
+        // the file:// at the beginning is required if you use windows if you don't want github actions to scream at you
+        if(System.getProperty("user.name") == "Finley"){
+            serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server-$mindustryVersion"
+        }
+    }
+
+    repositories{
+        mavenCentral()
+        maven{ url "https://www.jitpack.io" }
+    }
+
+    dependencies{
+        classpath "org.codehaus.groovy:groovy-json:3.0.8" // <- For JsonSlurper syntax highlighting
+        classpath "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     }
 }
+
+plugins{
+    id "java"
+    id "maven-publish"
+}
+
+
+group = "fr.xpdustry"
+version = metadata.version
+sourceSets.main.java.srcDirs = ["src/main/java"]
+
 
 repositories{
     mavenCentral()
@@ -30,8 +53,8 @@ dependencies{
 
 
 compileJava{
-    sourceCompatibility = 8
-    targetCompatibility = 8
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
     options.encoding = "UTF-8"
 }
 
@@ -41,7 +64,7 @@ compileTestJava{
 
 jar{
     // The following line is required
-    from configurations.runtimeClasspath.collect {
+    from configurations.runtimeClasspath.collect{
         it.isDirectory() ? it : zipTree(it)
     }
 
@@ -71,8 +94,18 @@ task runServer{
         }
 
         exec{
+            OperatingSystem os = OperatingSystem.current()
+
             workingDir = file(serverDirectoryPath)
-            commandLine = ["cmd", "/C", "start", "run_server.bat"]
+
+            // Open a mindustry server in a new terminal window
+            if(os.isWindows()){
+                commandLine = ["cmd", "/C", "start", "run_server.bat"]
+            }else if(os.isLinux()){
+                commandLine = ["sh", "-c", "./run_server.sh"]
+            }else{
+                throw new GradleException("Unsuported operation, please implement a case for your os")
+            }
         }
     }
 }
@@ -86,5 +119,38 @@ task deploy{
 task getArtifactPath{
     doLast{
         println jar.archiveFile.get().toString()
+    }
+}
+
+
+publishing{
+    publications{
+        maven(MavenPublication){
+            from components.java
+
+            pom{
+                name = metadata.displayName
+                artifactId = metadata.name
+                description = metadata.description
+
+                url = {
+                    if(metadata.repo != null) return "https://github.com/$metadata.repo"
+                    else return null
+                }.call()
+
+                licenses{
+                    license{
+                        name = "MIT License as Publication"
+                        url = "https://www.opensource.org/licenses/mit-license.php"
+                    }
+                }
+
+                developers{
+                    developer{
+                        id = metadata.author
+                    }
+                }
+            }
+        }
     }
 }

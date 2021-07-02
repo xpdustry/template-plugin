@@ -1,12 +1,13 @@
 {
-  "name": "TemplatePlugin",
-  "displayName": "Xpdustry Template Plugin",
+  "name": "template-plugin",
+  "displayName": "TemplatePlugin",
   "author": "Phinner",
   "description": "A template plugin for easier development, enjoy.",
-  "version": "1.3.3",
+  "version": "1.4",
   "minGameVersion": "105",
-  "hidden": false,
+  "hidden": true,
   "java": true,
-  "main": "fr.xpdustry.template.plugin.TemplatePlugin",
-  "repo": "XPdustry/TemplatePlugin"
+  "main": "fr.xpdustry.templates.TemplatePlugin",
+  "repo": "Xpdustry/TemplatePlugin",
+  "dependencies": []
 }

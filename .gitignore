@@ -1,3 +1,5 @@
-.idea/
-.gradle/
+/.idea/
+/.vscode/
+/.gradle/
+
 build/
