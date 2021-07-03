@@ -7,6 +7,9 @@ buildscript{
         // Mindustry API version you want to use
         mindustryVersion = "v126.2"
 
+        // Junit version for tests outside a server
+        junitVersion = "5.7.2"
+
         // Plugin metadata extracted from plugin.json
         metadata = new JsonSlurper().parseText(file("$rootDir/plugin.json").text)
 
@@ -47,18 +50,22 @@ repositories{
 }
 
 dependencies{
+    // Mindustry
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+
+    // Unit Testing
+    testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
+    testImplementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
 }
 
 
 compileJava{
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-    options.encoding = "UTF-8"
-}
-
-compileTestJava{
     options.encoding = "UTF-8"
 }
 
@@ -69,6 +76,15 @@ jar{
     }
 
     from "plugin.json"
+}
+
+
+compileTestJava{
+    options.encoding = "UTF-8"
+}
+
+test{
+    useJUnitPlatform()
 }
 
 
@@ -134,8 +150,12 @@ publishing{
                 description = metadata.description
 
                 url = {
-                    if(metadata.repo != null) return "https://github.com/$metadata.repo"
-                    else return null
+                    if(metadata.repo != null && !metadata.repo.isEmpty()){
+                        return "https://github.com/$metadata.repo"
+                    }else{
+                        println "Warning, the repo is unset"
+                        return null
+                    }
                 }.call()
 
                 licenses{
