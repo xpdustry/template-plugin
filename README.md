@@ -21,8 +21,10 @@ This template features some cool stuff such as:
 
 - When you use this template, make sure you change the information in `plugin.json`
   and set the `serverDirectoryPath`, `group` and `mindustryVersion` properties is `build.gradle`.
+  There is also the `rootProject.name` property in `settings.gradle`.
   
-- The plugin compiles to java 8 for compatibility reasons but nothing keeps you to change the compiler target or source to a higher jdk.
+- The plugin compiles to java 8 for compatibility reasons,
+  but nothing keeps you to change the compiler target or source to a higher jdk.
 
 - For faster testing, I recommend you to add an exit statement at the end of your server startup script such as:
 
