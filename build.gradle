@@ -33,15 +33,15 @@ buildscript{
     }
 }
 
+
 plugins{
     id "java"
     id "maven-publish"
 }
 
 
-group = "fr.xpdustry"
-version = metadata.version
-sourceSets.main.java.srcDirs = ["src/main/java"]
+group "fr.xpdustry"
+version metadata.version
 
 
 repositories{
@@ -67,6 +67,10 @@ compileJava{
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
     options.encoding = "UTF-8"
+}
+
+java{
+    withSourcesJar()
 }
 
 jar{
@@ -95,6 +99,11 @@ task moveJar{
         if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
             throw new GradleException("serverDirectoryPath is unset")
         }
+
+        // Deletes all the jar files that begins with the base artifact name
+        delete file("$serverDirectoryPath/config/mods").listFiles({
+            it.isFile() && it.name.endsWith(".jar") && it.name.startsWith((String) jar.archiveBaseName.get())
+        } as FileFilter)
 
         copy{
             from jar.archiveFile.get()
