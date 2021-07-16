@@ -16,10 +16,11 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 16
-      - name: Change wrapper permissions
-        run: chmod +x ./gradlew
+
       - name: Build plugin jar
-        run: ./gradlew jar
+        run: |
+          chmod +x ./gradlew
+          ./gradlew jar
 
       - name: Set up the release
         id: release
