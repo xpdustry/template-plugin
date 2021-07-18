@@ -40,7 +40,7 @@ plugins{
 }
 
 
-group "fr.xpdustry"
+group "fr.xpdustry.plugins"
 version metadata.version
 
 
@@ -53,6 +53,9 @@ dependencies{
     // Mindustry
     compileOnly "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     compileOnly "com.github.Anuken.Mindustry:core:$mindustryVersion"
+
+    // Distributor Lib
+    implementation "fr.xpdustry.Distributor:core:v0.5"
 
     // Unit Testing
     testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
@@ -74,12 +77,15 @@ java{
 }
 
 jar{
+    // Always include the plugin.json first when working with other plugins as dependencies
+    from "plugin.json"
+
     // The following line is required
     from configurations.runtimeClasspath.collect{
         it.isDirectory() ? it : zipTree(it)
     }
 
-    from "plugin.json"
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 
@@ -157,15 +163,7 @@ publishing{
                 name = metadata.displayName
                 artifactId = metadata.name
                 description = metadata.description
-
-                url = {
-                    if(metadata.repo != null && !metadata.repo.isEmpty()){
-                        return "https://github.com/$metadata.repo"
-                    }else{
-                        println "Warning, the repo is unset"
-                        return null
-                    }
-                }.call()
+                url = "https://github.com/$metadata.repo"
 
                 licenses{
                     license{
