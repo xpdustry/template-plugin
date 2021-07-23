@@ -1,13 +1,13 @@
 {
-  "name": "survivalpvp-plugin",
-  "displayName": "Xpdustry SurvivalPvp Plugin",
+  "name": "template-plugin",
+  "displayName": "Xpdustry TemplatePlugin",
   "author": "Phinner",
-  "description": "Admin abuse lol...",
-  "version": "0.2",
+  "description": "A template plugin for easier development, enjoy.",
+  "version": "1.5.1",
   "minGameVersion": "105",
   "hidden": true,
   "java": true,
-  "main": "fr.xpdustry.plugins.survivalpvp.SurvivalPvpPlugin",
-  "repo": "Xpdustry/SurvivalPvpPlugin",
+  "main": "fr.xpdustry.templates.TemplatePlugin",
+  "repo": "Xpdustry/TemplatePlugin",
   "dependencies": []
 }
