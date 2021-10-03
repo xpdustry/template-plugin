@@ -1,6 +1,6 @@
 package fr.xpdustry.templates;
 
-import arc.util.CommandHandler;
+import arc.util.*;
 import mindustry.mod.Plugin;
 
 import static arc.util.Log.info;
@@ -31,6 +31,5 @@ public class TemplatePlugin extends Plugin{
      */
     @Override
     public void registerClientCommands(CommandHandler handler){
-
     }
 }

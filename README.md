@@ -20,9 +20,7 @@ This template features some cool stuff such as:
 
 ## Tips and nice things to know
 
-- When you use this template, make sure you change the information in `plugin.json`
-  and set the `serverDirectoryPath`, `group` and `mindustryVersion` properties in `build.gradle`.
-  There is also the `rootProject.name` property in `settings.gradle`.
+- When you use this template, make sure to edit `plugin.json` and `gradle.properties`.
   
 - The plugin compiles to java 8 for compatibility reasons,
   but nothing keeps you to change the compiler target or source to a higher jdk.

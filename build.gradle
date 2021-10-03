@@ -4,22 +4,13 @@ import org.gradle.internal.os.OperatingSystem
 
 buildscript{
     ext{
-        // Mindustry API version you want to use
-        mindustryVersion = "v126.2"
-
-        // Junit version for tests outside a server
+        // Properties
+        mindustryVersion = property("props.mindustry-version")
+        serverDirectoryPath = property("props.mindustry-server-directory")
+        // Junit version for tests outside a mindustry server
         junitVersion = "5.7.2"
-
         // Plugin metadata extracted from plugin.json
         metadata = new JsonSlurper().parseText(file("$rootDir/plugin.json").text)
-
-        // A string that points directly to your server.jar directory
-        serverDirectoryPath = null
-
-        // the file:// at the beginning is required if you use windows if you don't want github actions to scream at you
-        if(System.getProperty("user.name") == "Finley"){
-            serverDirectoryPath = "file://C:/Users/Finley/Documents/My Games/Mindustry/Server/mindustry-server-$mindustryVersion"
-        }
     }
 
     repositories{
@@ -40,7 +31,7 @@ plugins{
 }
 
 
-group "fr.xpdustry"
+group property("props.project-group")
 version metadata.version
 
 
@@ -74,6 +65,8 @@ java{
 }
 
 jar{
+    archiveBaseName = project.property("props.project-name")
+
     // The following line is required
     from configurations.runtimeClasspath.collect{
         it.isDirectory() ? it : zipTree(it)
@@ -96,8 +89,8 @@ task moveJar{
     dependsOn jar
 
     doLast{
-        if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
-            throw new GradleException("serverDirectoryPath is unset")
+        if(serverDirectoryPath.isEmpty()){
+            throw new GradleException("props.mindustry-server-directory is unset")
         }
 
         // Deletes all the jar files that begins with the base artifact name
@@ -114,8 +107,8 @@ task moveJar{
 
 task runServer{
     doLast{
-        if(serverDirectoryPath == null || serverDirectoryPath.isEmpty()){
-            throw new GradleException("serverDirectoryPath is unset")
+        if(serverDirectoryPath.isEmpty()){
+            throw new GradleException("props.mindustry-server-directory is unset")
         }
 
         exec{
@@ -129,7 +122,7 @@ task runServer{
             }else if(os.isLinux()){
                 commandLine = ["sh", "-c", "./run_server.sh"]
             }else{
-                throw new GradleException("Unsuported operation, please implement a case for your os")
+                throw new GradleException("Unsuported operation, please implement a case for your OS.")
             }
         }
     }
