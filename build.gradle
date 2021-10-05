@@ -1,5 +1,4 @@
 import groovy.json.JsonSlurper
-import org.gradle.internal.os.OperatingSystem
 
 
 buildscript{
@@ -7,8 +6,6 @@ buildscript{
         // Properties
         mindustryVersion = property("props.mindustry-version")
         serverDirectoryPath = property("props.mindustry-server-directory")
-        // Junit version for tests outside a mindustry server
-        junitVersion = "5.7.2"
         // Plugin metadata extracted from plugin.json
         metadata = new JsonSlurper().parseText(file("$rootDir/plugin.json").text)
     }
@@ -48,11 +45,15 @@ dependencies{
     // Unit Testing
     testImplementation "com.github.Anuken.Arc:arc-core:$mindustryVersion"
     testImplementation "com.github.Anuken.Mindustry:core:$mindustryVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-params:$junitVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:5.8.1"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5.8.1"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:5.8.1"
 }
 
+
+java{
+    withSourcesJar()
+}
 
 compileJava{
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -60,9 +61,14 @@ compileJava{
     options.encoding = "UTF-8"
 }
 
-java{
-    withSourcesJar()
+test{
+    useJUnitPlatform()
 }
+
+compileTestJava{
+    options.encoding = "UTF-8"
+}
+
 
 jar{
     archiveBaseName = project.property("props.project-name")
@@ -72,16 +78,7 @@ jar{
         it.isDirectory() ? it : zipTree(it)
     }
 
-    from "plugin.json"
-}
-
-
-compileTestJava{
-    options.encoding = "UTF-8"
-}
-
-test{
-    useJUnitPlatform()
+    from "$rootDir/plugin.json"
 }
 
 
@@ -89,10 +86,6 @@ task moveJar{
     dependsOn jar
 
     doLast{
-        if(serverDirectoryPath.isEmpty()){
-            throw new GradleException("props.mindustry-server-directory is unset")
-        }
-
         // Deletes all the jar files that begins with the base artifact name
         delete file("$serverDirectoryPath/config/mods").listFiles({
             it.isFile() && it.name.endsWith(".jar") && it.name.startsWith((String) jar.archiveBaseName.get())
@@ -105,27 +98,11 @@ task moveJar{
     }
 }
 
-task runServer{
-    doLast{
-        if(serverDirectoryPath.isEmpty()){
-            throw new GradleException("props.mindustry-server-directory is unset")
-        }
-
-        exec{
-            OperatingSystem os = OperatingSystem.current()
-
-            workingDir = file(serverDirectoryPath)
-
-            // Open a mindustry server in a new terminal window
-            if(os.isWindows()){
-                commandLine = ["cmd", "/C", "start", "run_server.bat"]
-            }else if(os.isLinux()){
-                commandLine = ["sh", "-c", "./run_server.sh"]
-            }else{
-                throw new GradleException("Unsuported operation, please implement a case for your OS.")
-            }
-        }
-    }
+task runServer(type: JavaExec){
+    workingDir = serverDirectoryPath
+    classpath = files("$serverDirectoryPath/server.jar")
+    mainClass = "mindustry.server.ServerLauncher"
+    standardInput = System.in
 }
 
 task deployJar{
@@ -133,11 +110,16 @@ task deployJar{
     dependsOn runServer
 }
 
-// Required if you want to use the Release GitHub action,
-task getArtifactPath{
-    doLast{
-        println jar.archiveFile.get().toString()
+// Makes sure the task are only available if the props.mindustry-server-directory is set correctly
+for(Task serverTask : [moveJar, runServer, deployJar]){
+    serverTask.configure{
+        onlyIf{ file(serverDirectoryPath).exists() }
     }
+}
+
+// Required if you want to use the Release GitHub action
+task getArtifactPath{
+    doLast{ println jar.archiveFile.get().toString() }
 }
 
 
