@@ -1,4 +1,5 @@
 import groovy.json.JsonSlurper
+import java.nio.charset.StandardCharsets
 
 
 buildscript{
@@ -58,7 +59,7 @@ java{
 compileJava{
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
-    options.encoding = "UTF-8"
+    options.encoding = StandardCharsets.UTF_8
 }
 
 test{
@@ -66,7 +67,7 @@ test{
 }
 
 compileTestJava{
-    options.encoding = "UTF-8"
+    options.encoding = StandardCharsets.UTF_8
 }
 
 

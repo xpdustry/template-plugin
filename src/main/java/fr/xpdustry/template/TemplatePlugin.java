@@ -1,4 +1,4 @@
-package fr.xpdustry.templates;
+package fr.xpdustry.template;
 
 import arc.util.*;
 import mindustry.mod.Plugin;
