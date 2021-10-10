@@ -123,6 +123,21 @@ task getArtifactPath{
     doLast{ println jar.archiveFile.get().toString() }
 }
 
+// Utility task :^)
+task generateReadmeHeader{
+    doLast{
+        StringBuilder builder = new StringBuilder(512)
+
+        builder.append("# ").append(project.property("props.project-name")).append("\n\n")
+        builder.append("[![Jitpack latest version](https://jitpack.io/v/${metadata.repo}.svg)](https://jitpack.io/#${metadata.repo})\n")
+        builder.append("[![Build status](https://github.com/${metadata.repo}/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/${metadata.repo}/actions/workflows/build.yml)\n")
+        builder.append("[![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)\n")
+
+        if(!file("$rootDir/generated").exists()) file("$rootDir/generated").mkdir()
+        file("$rootDir/generated/README.md").write(builder.toString())
+    }
+}
+
 
 publishing{
     publications{
