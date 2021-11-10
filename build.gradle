@@ -6,7 +6,7 @@ buildscript{
     ext{
         // Properties
         mindustryVersion = property("props.mindustry-version")
-        serverDirectoryPath = property("props.mindustry-server-directory")
+        serverDirectoryPath = System.getenv("MINDUSTRY_SERVER_HOME")
         // Plugin metadata extracted from plugin.json
         metadata = new JsonSlurper().parseText(file("$rootDir/plugin.json").text)
     }
@@ -83,38 +83,33 @@ jar{
 }
 
 
-task moveJar{
-    dependsOn jar
+if(serverDirectoryPath != null && file(serverDirectoryPath).exists()){
+    task moveJar{
+        dependsOn jar
 
-    doLast{
-        // Deletes all the jar files that begins with the base artifact name
-        delete file("$serverDirectoryPath/config/mods").listFiles({
-            it.isFile() && it.name.endsWith(".jar") && it.name.startsWith((String) jar.archiveBaseName.get())
-        } as FileFilter)
+        doLast{
+            // Deletes all the jar files that begins with the base artifact name
+            delete file("$serverDirectoryPath/config/mods").listFiles({
+                it.isFile() && it.name.endsWith(".jar") && it.name.startsWith((String) jar.archiveBaseName.get())
+            } as FileFilter)
 
-        copy{
-            from jar.archiveFile.get()
-            into file("$serverDirectoryPath/config/mods")
+            copy{
+                from jar.archiveFile.get()
+                into file("$serverDirectoryPath/config/mods")
+            }
         }
     }
-}
 
-task runServer(type: JavaExec){
-    workingDir = serverDirectoryPath
-    classpath = files("$serverDirectoryPath/server.jar")
-    mainClass = "mindustry.server.ServerLauncher"
-    standardInput = System.in
-}
+    task runServer(type: JavaExec){
+        workingDir = serverDirectoryPath
+        classpath = files("$serverDirectoryPath/server.jar")
+        mainClass = "mindustry.server.ServerLauncher"
+        standardInput = System.in
+    }
 
-task deployJar{
-    dependsOn moveJar
-    dependsOn runServer
-}
-
-// Makes sure the task are only available if the props.mindustry-server-directory is set correctly
-for(Task serverTask : [moveJar, runServer, deployJar]){
-    serverTask.configure{
-        onlyIf{ file(serverDirectoryPath).exists() }
+    task deployJar{
+        dependsOn moveJar
+        dependsOn runServer
     }
 }
 
@@ -130,8 +125,11 @@ task generateReadmeHeader{
 
         builder.append("# ").append(project.property("props.project-name")).append("\n\n")
         builder.append("[![Jitpack latest version](https://jitpack.io/v/${metadata.repo}.svg)](https://jitpack.io/#${metadata.repo})\n")
-        builder.append("[![Build status](https://github.com/${metadata.repo}/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/${metadata.repo}/actions/workflows/build.yml)\n")
-        builder.append("[![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)\n")
+        builder.append("[![Build status](https://github.com/${metadata.repo}/actions/workflows/build.yml/badge.svg?branch=master&event=push)]" +
+                "(https://github.com/${metadata.repo}/actions/workflows/build.yml)\n")
+        builder.append("[![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)]" +
+                "(https://github.com/Anuken/Mindustry/releases)\n\n")
+        builder.append("## Description").append("\n\n").append(metadata.description)
 
         if(!file("$rootDir/generated").exists()) file("$rootDir/generated").mkdir()
         file("$rootDir/generated/README.md").write(builder.toString())
