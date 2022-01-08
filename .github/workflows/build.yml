@@ -18,7 +18,7 @@ jobs:
         id: build
         run: |
           chmod +x ./gradlew
-          ./gradlew shadowJar
+          ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
       - name: Upload built jar file

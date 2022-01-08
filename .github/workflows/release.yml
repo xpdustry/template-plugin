@@ -20,7 +20,7 @@ jobs:
       - name: Build plugin jar
         run: |
           chmod +x ./gradlew
-          ./gradlew shadowJar
+          ./gradlew build
 
       - name: Set up the release
         id: release
