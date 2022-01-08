@@ -1,2 +1,1 @@
 - Now, this repo is powered by shadowJar for building plugins instead of the fatJar trick.
-- 
