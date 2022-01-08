@@ -13,7 +13,6 @@ This template features some cool stuff such as:
 - Gradle tasks for testing:
   - `gradlew moveJar` Move the output jar to your server mod directory.
   - `gradlew runServer` Start the server in a new cmd.
-  - `gradlew deployJar` Executes `moveJar` and `runServer`.
 - GitHub action for easier release and Jitpack usage:
    - You just have to run the `Release` workflow manually,
      it will automatically take the plugin version in your plugin.json file and upload the jar.
@@ -21,8 +20,5 @@ This template features some cool stuff such as:
 ## Tips and nice things to know
 
 - When you use this template, make sure to edit `plugin.json` and `gradle.properties`.
-  
-- The plugin compiles to java 8 for maximum compatibility,
-  but nothing keeps you to change the compiler target or source to a higher jdk.
 
 Thank you for using this template !

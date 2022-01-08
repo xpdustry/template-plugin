@@ -1,9 +1,9 @@
 {
   "name": "xpdustry-template-plugin",
   "displayName": "Xpdustry TemplatePlugin",
-  "author": "Phinner",
+  "author": "Xpdustry",
   "description": "A template plugin for easier development, enjoy.",
-  "version": "1.7.2",
+  "version": "1.8",
   "minGameVersion": "105",
   "hidden": true,
   "java": true,

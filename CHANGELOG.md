@@ -1,2 +1,2 @@
-- Added changelog support (Edit CHANGELOG.md, each time you need to make a new release).
-- Improved `generateReadmeHeader` task, now it includes the project description.
+- Now, this repo is powered by shadowJar for building plugins instead of the fatJar trick.
+- 
