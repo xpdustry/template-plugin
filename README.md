@@ -6,8 +6,6 @@
 
 ## Description
 
-Template stolen from **Anuken/ExamplePlugin** lol...
-
 This template features some cool stuff such as:
 - [Jitpack](https://jitpack.io/) support.
 - Gradle tasks for testing:
@@ -17,8 +15,11 @@ This template features some cool stuff such as:
    - You just have to run the `Release` workflow manually,
      it will automatically take the plugin version in your plugin.json file and upload the jar.
 
-## Tips and nice things to know
+When using this template, don't forget to change `plugin.json` and `gradle.properties`.
 
-- When you use this template, make sure to edit `plugin.json` and `gradle.properties`.
+## Building
+
+- `./gradlew jar` for a simple jar that contains only the plugin.
+- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
 
 Thank you for using this template !
