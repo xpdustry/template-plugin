@@ -17,7 +17,7 @@ jobs:
         with:
           java-version: 16
 
-      - name: Build plugin jar
+      - name: Build artifact
         run: |
           chmod +x ./gradlew
           ./gradlew build

@@ -14,14 +14,14 @@ jobs:
         with:
           java-version: 16
 
-      - name: Build plugin jar
+      - name: Build artifact
         id: build
         run: |
           chmod +x ./gradlew
           ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
-      - name: Upload built jar file
+      - name: Upload artifact
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}
