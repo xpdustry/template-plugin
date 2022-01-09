@@ -6,7 +6,6 @@ import mindustry.mod.Plugin;
 
 @SuppressWarnings("unused")  // <- Only used for this template so IntelliJ stop screaming at me...
 public class TemplatePlugin extends Plugin{
-
     /**
      * This method is called when game initializes.
      */
