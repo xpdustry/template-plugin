@@ -41,11 +41,12 @@ jobs:
           r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
           echo "::set-output name=CHANGELOG::$r"
 
-      - name: Upload artifacts
+      - name: Upload artifact
         uses: svenstaro/upload-release-action@v2
         with:
           release_name: v${{ steps.release.outputs.RELEASE_TAG }} release
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          asset_name: ${{ github.event.repository.name }}
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
           body: ${{ steps.changelog.outputs.CHANGELOG }}
