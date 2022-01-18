@@ -35,3 +35,10 @@ jobs:
         with:
           name: ${{ github.event.repository.name }}
           path: ${{ steps.build.outputs.ARTIFACT_PATH }}
+
+      - name: Publish snapshot to Xpdustry
+        if: "${{ github.event_name == 'push' }}"
+        run: ./gradlew publish
+        env:
+          ORG_GRADLE_PROJECT_xpdustryUsername: "${{ secrets.XPDUSTRY_REPO_USERNAME }}"
+          ORG_GRADLE_PROJECT_xpdustryPassword: "${{ secrets.XPDUSTRY_REPO_PASSWORD }}"

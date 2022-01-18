@@ -171,6 +171,9 @@ components.withType(AdhocComponentWithVariants).forEach { c ->
 
 
 indra{
+    publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
+    publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
+
     mitLicense()
 
     def repo = (metadata.repo as String).split("/")

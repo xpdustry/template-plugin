@@ -6,6 +6,8 @@
 
 ## Description
 
+**Xpdustry variation for publishing packages to our repo.**
+
 This template features some cool stuff such as:
 
 - [Jitpack](https://jitpack.io/) support.

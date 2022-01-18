@@ -51,3 +51,9 @@ jobs:
           asset_name: ${{ github.event.repository.name }}.jar
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
+
+      - name: Publish snapshot to Xpdustry
+        run: ./gradlew publish
+        env:
+          ORG_GRADLE_PROJECT_xpdustryUsername: "${{ secrets.XPDUSTRY_REPO_USERNAME }}"
+          ORG_GRADLE_PROJECT_xpdustryPassword: "${{ secrets.XPDUSTRY_REPO_PASSWORD }}"
