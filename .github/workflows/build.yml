@@ -27,7 +27,6 @@ jobs:
       - name: Build artifact
         id: build
         run: |
-          chmod +x ./gradlew
           ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 

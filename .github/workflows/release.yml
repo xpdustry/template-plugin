@@ -20,9 +20,7 @@ jobs:
           java-version: 16
 
       - name: Build artifact
-        run: |
-          chmod +x ./gradlew
-          ./gradlew build
+        run: ./gradlew build
 
       - name: Set up the release
         id: release
