@@ -1,4 +1,6 @@
 import groovy.json.JsonSlurper
+import org.eclipse.jgit.transport.CredentialsProvider
+
 import java.nio.charset.StandardCharsets
 import net.ltgt.gradle.errorprone.CheckSeverity
 
@@ -140,9 +142,8 @@ task getArtifactPath{
 
 task pushRelease(dependsOn: requireClean){
     doLast{
-        def git = indraGit.git()
-        git.tag().setAnnotated(true).setName("v" + metadata.version).setMessage(file("$rootDir/CHANGELOG.md").text).call()
-        git.push().setRemote("origin").setPushOptions(List.of("--tags")).call()
+        exec{ commandLine("git"); args("tag", "-s", "v$metadata.version", "-F", "./CHANGELOG.md") }
+        exec{ commandLine("git"); args("push", "origin", "--tags") }
     }
 }
 
