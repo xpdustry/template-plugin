@@ -1,6 +1,6 @@
-name: Build
+name: Commit
 
-on: [push, workflow_dispatch, pull_request]
+on: [push]
 
 jobs:
   build:
