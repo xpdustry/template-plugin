@@ -138,12 +138,11 @@ task getArtifactPath{
     doLast{ println shadowJar.archiveFile.get().toString() }
 }
 
-task pushRelease{
+task pushRelease(dependsOn: requireClean){
     doLast{
-        dependsOn requireClean
         def git = indraGit.git()
-        git.tag().annotated(true).name("v" + metadata.version).message(file("$rootDir/CHANGELOG.md").text).call()
-        git.push().remote("origin").pushOptions(List.of("--tags")).call()
+        git.tag().setAnnotated(true).setName("v" + metadata.version).setMessage(file("$rootDir/CHANGELOG.md").text).call()
+        git.push().setRemote("origin").setPushOptions(List.of("--tags")).call()
     }
 }
 
