@@ -180,6 +180,8 @@ indra{
     }
 
     configurePublications{
+        from components.java
+
         pom{
             developers{
                 developer{
