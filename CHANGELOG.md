@@ -1,2 +1,2 @@
-- optimized `build.gradle`
-  - Added checking frameworks.
+- maven-publish to indra (simpler publication system)
+- added `pushRelease` task

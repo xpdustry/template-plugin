@@ -9,12 +9,11 @@
 This template features some cool stuff such as:
 - [Jitpack](https://jitpack.io/) support.
 - Gradle tasks for testing:
-  - `gradlew moveJar` Move the output jar to your server mod directory.
-  - `gradlew runServer` Start the server in a new cmd.
+  - `./gradlew moveJar` Move the output jar to your server mod directory.
+  - `./gradlew runServer` Start the server in a new cmd.
 - GitHub action for easier release and Jitpack usage:
-   - You just have to run the `Release` workflow manually,
-     it will automatically take the plugin version in your plugin.json file and upload the jar.
-   - Changelog support: edit `CHANGELOG.md` before each release, it will be used as the release text.
+  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew pushRelease`, 
+    it will automatically create a release tag and push it to trigger the release workflow.
 
 When using this template, don't forget to change `plugin.json` and `gradle.properties`.
 
