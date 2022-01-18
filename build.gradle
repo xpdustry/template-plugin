@@ -140,12 +140,31 @@ task getArtifactPath{
     doLast{ println shadowJar.archiveFile.get().toString() }
 }
 
-task pushRelease(dependsOn: requireClean){
+task pushRelease(/*dependsOn: requireClean*/){
     doLast{
-        exec{ commandLine("git"); args("tag", "-s", "v$metadata.version", "-F", "./CHANGELOG.md") }
-        exec{ commandLine("git"); args("push", "origin", "--tags") }
+        // Checks if a signing key is present
+        def signing = new ByteArrayOutputStream().withStream{ out ->
+            exec{
+                commandLine "git"
+                args "config", "--global", "user.signingkey"
+                standardOutput out
+            }.with{it.exitValue == 0 && !out.toString().isBlank() }
+        }
+
+        exec{
+            commandLine("git")
+            def list = ["tag", "v$metadata.version", "-F", "./CHANGELOG.md"]
+            if(signing) list.add("-s")
+            args list
+        }
+
+        exec{
+            commandLine("git")
+            args "push", "origin", "--tags", "--signed=if-asked"
+        }
     }
 }
+
 
 // Avoid publishing shadow artifacts to maven repo
 // > https://github.com/johnrengelman/shadow/issues/651
