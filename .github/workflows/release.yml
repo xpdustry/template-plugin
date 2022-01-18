@@ -60,7 +60,7 @@ jobs:
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
 
-      - name: Publish snapshot to Xpdustry
+      - name: Publish release to Xpdustry
         run: ./gradlew publish
         env:
           ORG_GRADLE_PROJECT_xpdustryUsername: "${{ secrets.XPDUSTRY_REPO_USERNAME }}"
