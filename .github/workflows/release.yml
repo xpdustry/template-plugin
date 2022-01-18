@@ -47,6 +47,6 @@ jobs:
           body: ${{ steps.changelog.outputs.CHANGELOG }}
 
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          asset_name: ${{ github.event.repository.name }}
+          asset_name: ${{ github.event.repository.name }}.jar
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
