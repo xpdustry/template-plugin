@@ -12,7 +12,7 @@ This template features some cool stuff such as:
   - `./gradlew moveJar` Move the output jar to your server mod directory.
   - `./gradlew runServer` Start the server in a new cmd.
 - GitHub action for easier release and Jitpack usage:
-  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew pushRelease`, 
+  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, 
     it will automatically create a release tag and push it to trigger the release workflow.
 
 When using this template, don't forget to change `plugin.json` and `gradle.properties`.

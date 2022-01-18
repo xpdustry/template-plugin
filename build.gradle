@@ -1,6 +1,4 @@
 import groovy.json.JsonSlurper
-import org.eclipse.jgit.transport.CredentialsProvider
-
 import java.nio.charset.StandardCharsets
 import net.ltgt.gradle.errorprone.CheckSeverity
 
@@ -140,7 +138,7 @@ task getArtifactPath{
     doLast{ println shadowJar.archiveFile.get().toString() }
 }
 
-task pushRelease(/*dependsOn: requireClean*/){
+task createRelease(dependsOn: requireClean){
     doLast{
         // Checks if a signing key is present
         def signing = new ByteArrayOutputStream().withStream{ out ->
@@ -152,19 +150,18 @@ task pushRelease(/*dependsOn: requireClean*/){
         }
 
         exec{
-            commandLine("git")
+            commandLine "git"
             def list = ["tag", "v$metadata.version", "-F", "./CHANGELOG.md"]
             if(signing) list.add("-s")
             args list
         }
 
         exec{
-            commandLine("git")
-            args "push", "origin", "--tags", "--signed=if-asked"
+            commandLine "git"
+            args "push", "origin", "--tags"
         }
     }
 }
-
 
 // Avoid publishing shadow artifacts to maven repo
 // > https://github.com/johnrengelman/shadow/issues/651

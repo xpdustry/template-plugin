@@ -1,2 +1,1 @@
-- maven-publish to indra (simpler publication system)
-- added `pushRelease` task
+- renamed `pushRelease` to `createRelease`.

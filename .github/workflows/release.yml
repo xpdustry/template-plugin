@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - 'v*'
-  workflow_dispatch:
 
 jobs:
   build:
@@ -45,8 +44,9 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           release_name: v${{ steps.release.outputs.RELEASE_TAG }} release
+          body: ${{ steps.changelog.outputs.CHANGELOG }}
+
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           asset_name: ${{ github.event.repository.name }}
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
-          body: ${{ steps.changelog.outputs.CHANGELOG }}
