@@ -14,6 +14,7 @@ This template features some cool stuff such as:
 - GitHub action for easier release and Jitpack usage:
    - You just have to run the `Release` workflow manually,
      it will automatically take the plugin version in your plugin.json file and upload the jar.
+   - Changelog support: edit `CHANGELOG.md` before each release, it will be used as the release text.
 
 When using this template, don't forget to change `plugin.json` and `gradle.properties`.
 

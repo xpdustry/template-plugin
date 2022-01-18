@@ -16,7 +16,6 @@ public class TemplatePlugin extends Plugin{
 
     /**
      * This method is called when the game register the server-side commands.
-     * Make sure your plugin don't load the commands twice by adding a simple boolean check.
      */
     @Override
     public void registerServerCommands(CommandHandler handler){
@@ -24,7 +23,6 @@ public class TemplatePlugin extends Plugin{
 
     /**
      * This method is called when the game register the client-side commands.
-     * Make sure your plugin don't load the commands twice by adding a simple boolean check.
      */
     @Override
     public void registerClientCommands(CommandHandler handler){
