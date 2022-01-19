@@ -103,6 +103,9 @@ tasks.withType(JavaCompile).configureEach {
     }
 }
 
+// Disables the signing task, until I figure this shit out...
+tasks.signMavenPublication.enabled(false)
+
 task moveJar(dependsOn: shadowJar){
     doLast{
         // Deletes all the jar files that begins with the base artifact name
