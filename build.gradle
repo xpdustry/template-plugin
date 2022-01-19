@@ -34,7 +34,7 @@ plugins{
 
 group property("props.project-group")
 version metadata.version + (indraGit.headTag() == null ? "-SNAPSHOT" : "")
-
+println(indraGit.headTag())
 
 repositories{
     mavenCentral()
