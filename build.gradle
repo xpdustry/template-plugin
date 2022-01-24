@@ -169,7 +169,7 @@ task createRelease(dependsOn: requireClean){
 // Avoid publishing shadow artifacts to maven repo
 // > https://github.com/johnrengelman/shadow/issues/651
 components.withType(AdhocComponentWithVariants).forEach { c ->
-    c.withVariantsFromConfiguration(configurations.shadowRuntimeElements) {skip() }
+    c.withVariantsFromConfiguration(configurations.shadowRuntimeElements) { skip() }
 }
 
 
