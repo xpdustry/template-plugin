@@ -1,7 +1,10 @@
 package fr.xpdustry.template;
 
 import arc.util.*;
-import mindustry.mod.Plugin;
+
+import mindustry.mod.*;
+
+import org.jetbrains.annotations.*;
 
 
 @SuppressWarnings("unused")  // <- Only used for this template so IntelliJ stop screaming at me...
@@ -18,13 +21,13 @@ public class TemplatePlugin extends Plugin{
      * This method is called when the game register the server-side commands.
      */
     @Override
-    public void registerServerCommands(CommandHandler handler){
+    public void registerServerCommands(@NotNull CommandHandler handler){
     }
 
     /**
      * This method is called when the game register the client-side commands.
      */
     @Override
-    public void registerClientCommands(CommandHandler handler){
+    public void registerClientCommands(@NotNull CommandHandler handler){
     }
 }
