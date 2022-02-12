@@ -11,8 +11,8 @@ This template features some cool stuff such as:
 - [Jitpack](https://jitpack.io/) support.
 
 - Gradle tasks for testing:
-    - `./gradlew moveJar`: Move the output jar to your server mod directory.
-    - `./gradlew runServer`: Start the server in a new cmd.
+    - `./gradlew runMindustryClient`: Run mindustry in desktop.
+    - `./gradlew runMindustryClient`: Run mindustry in a server.
 
 - GitHub action for easier release and Jitpack usage:
     - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create a release tag and push it to trigger the release workflow.
@@ -25,6 +25,8 @@ This template features some cool stuff such as:
 # Nice tips
 
 - When using this template, don't forget to change `plugin.json` and `gradle.properties`.
+
+- This template targets V6 by default, you can change it by editing the `Versions` object in `build.gradle.kts`
 
 - For Linux/macOS users, don't forget to execute `chmod +x ./gradlew` to make it executable.
     - For Windows users, you'll need to do:
