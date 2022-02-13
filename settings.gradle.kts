@@ -9,5 +9,4 @@ pluginManagement {
 
 val props = Properties()
 file("./gradle.properties").reader().use { props.load(it) }
-// Grab "props.project-name" from the property file
 rootProject.name = props.getProperty("props.project-name")

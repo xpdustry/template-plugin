@@ -1,4 +1,4 @@
-import fr.xpdustry.toxopid.util.PluginMetadata
+import fr.xpdustry.toxopid.util.ModMetadata
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
@@ -6,11 +6,14 @@ import java.io.ByteArrayOutputStream
 plugins {
     java
     `maven-publish`
-    id("com.github.johnrengelman.shadow") version "7.1.2"
     id("net.ltgt.errorprone") version "2.0.2"
     id("net.kyori.indra.publishing") version "2.0.6"
     id("net.kyori.indra.git") version "2.0.6"
-    id("fr.xpdustry.toxopid") version "1.0.0"
+    id("fr.xpdustry.toxopid") version "1.3.0"
+}
+
+repositories {
+    mavenCentral()
 }
 
 object Versions {
@@ -19,17 +22,13 @@ object Versions {
     const val junit         = "5.8.2"
 }
 
-val metadata = PluginMetadata(file("${rootProject.rootDir}/plugin.json"))
+val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
 group = property("props.project-group").toString()
 version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
 
 toxopid {
     arcCompileVersion.set(Versions.arc)
     mindustryCompileVersion.set(Versions.mindustry)
-}
-
-repositories {
-    mavenCentral()
 }
 
 dependencies {
@@ -73,7 +72,7 @@ tasks.withType(JavaCompile::class.java).configureEach {
     }
 }
 
-// Disables the signing task, until I figure this shit out...
+// Disables the signing task
 tasks.signMavenPublication.get().enabled = false
 
 // Required if you want to use the Release GitHub action
@@ -115,9 +114,9 @@ indra {
         github(repo[0], repo[1]) {
             ci(true)
             issues(true)
+            scm(true)
         }
     }
-
 
     configurePublications {
         from(components["java"])
