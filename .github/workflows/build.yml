@@ -22,11 +22,12 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: wrapper
 
       - name: Build artifact
         id: build
         run: |
-          git checkout master     # For some reasons, the head is detached
           ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
