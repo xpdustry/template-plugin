@@ -20,10 +20,13 @@ jobs:
 
       - uses: gradle/wrapper-validation-action@v1
 
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
+      - uses: actions/cache@v2
         with:
-          gradle-version: wrapper
+          path: |
+            ~/.gradle/wrapper
+            ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: ${{ runner.os }}-gradle-
 
       - name: Build artifact
         id: build
@@ -55,7 +58,7 @@ jobs:
           r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
           echo "::set-output name=CHANGELOG::$r"
 
-      - name: Upload artifact
+      - name: Upload artifact to Release
         if: "${{ env.STATUS == 'release' }}"
         uses: svenstaro/upload-release-action@v2
         with:
@@ -67,7 +70,7 @@ jobs:
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
 
-      - name: Upload artifact
+      - name: Upload artifact to Actions
         uses: actions/upload-artifact@v2
         with:
           name: ${{ github.event.repository.name }}
