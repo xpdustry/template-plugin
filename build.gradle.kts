@@ -7,8 +7,8 @@ plugins {
     java
     `maven-publish`
     id("net.ltgt.errorprone") version "2.0.2"
-    id("net.kyori.indra.publishing") version "2.0.6"
-    id("net.kyori.indra.git") version "2.0.6"
+    id("net.kyori.indra.publishing") version "2.1.1"
+    id("net.kyori.indra.git") version "2.1.1"
     id("fr.xpdustry.toxopid") version "1.3.0"
 }
 
@@ -101,7 +101,6 @@ tasks.create("createRelease") {
         }
     }
 }
-
 
 indra {
     mitLicense()
