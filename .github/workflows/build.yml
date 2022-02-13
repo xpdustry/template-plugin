@@ -26,7 +26,7 @@ jobs:
       - name: Build artifact
         id: build
         run: |
-          echo $(git status)
+          git checkout master     # For some reasons, the head is detached
           ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
