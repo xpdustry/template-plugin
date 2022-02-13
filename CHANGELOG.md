@@ -1,2 +1,5 @@
-- Created Toxopid plugin for helper functions
-- Migrated to Kotlin dsl because it's better :)
+Nice :^)
+
+- Small bug fixes.
+- New version of Toxopid.
+- Updated workflows.

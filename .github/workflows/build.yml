@@ -29,12 +29,6 @@ jobs:
           ./gradlew build
           echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ github.event.repository.name }}
-          path: ${{ steps.build.outputs.ARTIFACT_PATH }}
-
       - name: Publish to Xpdustry
         if: ${{ github.event_name != 'pull_request' }}
         run: ./gradlew publish
@@ -68,7 +62,7 @@ jobs:
           r="${r//$'\r'/'%0D'}"                             # Multiline escape sequences for '\r'
           echo "::set-output name=CHANGELOG::$r"
 
-      - name: Upload artifact
+      - name: Upload artifact to Release
         if: "${{ env.STATUS == 'release' }}"
         uses: svenstaro/upload-release-action@v2
         with:
@@ -80,3 +74,8 @@ jobs:
           file: ${{ steps.release.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
 
+      - name: Upload artifact to Actions
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.event.repository.name }}
+          path: ${{ steps.build.outputs.ARTIFACT_PATH }}
