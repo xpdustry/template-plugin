@@ -72,9 +72,6 @@ tasks.withType(JavaCompile::class.java).configureEach {
     }
 }
 
-// Disables the signing task
-tasks.signMavenPublication.get().enabled = false
-
 // Required if you want to use the Release GitHub action
 tasks.create("getArtifactPath") {
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
