@@ -16,8 +16,8 @@ This template features some cool stuff such as:
 
 - GitHub action for easier release and Jitpack usage:
     - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
-      a release tag and push it to trigger the release workflow.
-      If you pushed your release by mistake, simply run in your terminal.
+      a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run in
+      your terminal.
 
       ```batch
       # https://stackoverflow.com/a/5480292/15861283
