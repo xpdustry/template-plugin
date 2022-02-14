@@ -6,6 +6,7 @@ import java.io.ByteArrayOutputStream
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
+    jacoco
     `maven-publish`
     alias(libs.plugins.errorprone)
     alias(libs.plugins.toxopid)
@@ -89,6 +90,14 @@ tasks.create("createRelease") {
         exec {
             commandLine("git", "push", "origin", "--tags")
         }
+    }
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        html.required.set(false)
+        csv.required.set(false)
     }
 }
 
