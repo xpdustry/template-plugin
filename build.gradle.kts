@@ -17,9 +17,9 @@ repositories {
 }
 
 object Versions {
-    const val mindustry     = "v126.2"
-    const val arc           = "v126.2"
-    const val junit         = "5.8.2"
+    const val junit     = "5.8.2"
+    const val jetanno   = "23.0.0"
+    const val nullaway  = "0.9.4"
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
@@ -27,8 +27,8 @@ group = property("props.project-group").toString()
 version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
 
 toxopid {
-    arcCompileVersion.set(Versions.arc)
-    mindustryCompileVersion.set(Versions.mindustry)
+    arcCompileVersion.set(metadata.minGameVersion)
+    mindustryCompileVersion.set(metadata.minGameVersion)
 }
 
 dependencies {
@@ -38,8 +38,8 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Versions.junit}")
 
     // Static analysis
-    compileOnly("org.jetbrains:annotations:23.0.0")
-    annotationProcessor("com.uber.nullaway:nullaway:0.9.4")
+    compileOnly("org.jetbrains:annotations:${Versions.jetanno}")
+    annotationProcessor("com.uber.nullaway:nullaway:${Versions.nullaway}")
     errorprone("com.google.errorprone:error_prone_core:2.10.0")
     errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
 }

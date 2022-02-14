@@ -1,5 +1,4 @@
-Nice :^)
+Small change
 
-- Small bug fixes.
-- New version of Toxopid.
-- Updated workflows.
+- The build script now relies on `minGameVersion` from `plugin.json` for compilation.
+- Improved README.

@@ -29,7 +29,9 @@ This template features some cool stuff such as:
 
 - When using this template, don't forget to change `plugin.json` and `gradle.properties`.
 
-- This template targets V6 by default, you can change it by editing the `Versions` object in `build.gradle.kts`
+- This template targets V6 by default, you can change it by editing `minGameVersion` in `plugin.json`.
+
+- To enable NullAway (null checking), change the `NullAway:AnnotatedPackages` option to the root package of your plugin in `build.gradle.kts`.
 
 - To make sure gradle is always executable do:
     ```batch
