@@ -15,7 +15,15 @@ This template features some cool stuff such as:
     - `./gradlew runMindustryServer`: Run mindustry in a server.
 
 - GitHub action for easier release and Jitpack usage:
-    - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create a release tag and push it to trigger the release workflow.
+    - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
+      a release tag and push it to trigger the release workflow.
+      If you pushed your release by mistake, simply run in your terminal.
+
+      ```batch
+      # https://stackoverflow.com/a/5480292/15861283
+      git push --delete origin v{release-version}
+      git tag -d v{release-version}
+      ```
 
 ## Building
 
@@ -24,13 +32,16 @@ This template features some cool stuff such as:
 
 # Nice tips
 
-- When using this template, don't forget to change `plugin.json` and `gradle.properties`.
+- When using this template, don't forget to change `plugin.json` and `gradle.properties`
+  and also checking out `gradle/libs.versions.toml` to make sure the dependencies are up-to-date.
+    - You can change the java version by editing `java`.
 
 - This template targets V6 by default, you can change it by editing `minGameVersion` in `plugin.json`.
 
-- To enable NullAway (null checking), change the `NullAway:AnnotatedPackages` option to the root package of your plugin in `build.gradle.kts`.
+- Don't forget to edit `props.root-packge` in `gradle.properties` to enable NullAway.
 
 - To make sure gradle is always executable do:
+
     ```batch
     # https://stackoverflow.com/a/54048315/15861283
     git update-index --chmod=+x gradlew

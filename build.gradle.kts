@@ -3,23 +3,18 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
     `maven-publish`
-    id("net.ltgt.errorprone") version "2.0.2"
-    id("net.kyori.indra.publishing") version "2.1.1"
-    id("net.kyori.indra.git") version "2.1.1"
-    id("fr.xpdustry.toxopid") version "1.3.0"
+    alias(libs.plugins.errorprone)
+    alias(libs.plugins.toxopid)
+    alias(libs.plugins.indra.git)
+    alias(libs.plugins.indra.publishing)
 }
 
 repositories {
     mavenCentral()
-}
-
-object Versions {
-    const val junit     = "5.8.2"
-    const val jetanno   = "23.0.0"
-    const val nullaway  = "0.9.4"
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
@@ -33,15 +28,13 @@ toxopid {
 
 dependencies {
     // Unit tests
-    testImplementation("org.junit.jupiter:junit-jupiter-params:${Versions.junit}")
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${Versions.junit}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${Versions.junit}")
+    testImplementation(libs.junit)
 
     // Static analysis
-    compileOnly("org.jetbrains:annotations:${Versions.jetanno}")
-    annotationProcessor("com.uber.nullaway:nullaway:${Versions.nullaway}")
-    errorprone("com.google.errorprone:error_prone_core:2.10.0")
-    errorproneJavac("com.google.errorprone:javac:9+181-r4173-1")
+    compileOnly(libs.jetbrains.annotations)
+    annotationProcessor(libs.nullaway)
+    errorprone(libs.errorprone.core)
+    errorproneJavac(libs.errorprone.javac)
 }
 
 java {
@@ -58,8 +51,8 @@ tasks.test {
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
+    sourceCompatibility = libs.versions.java.get()
+    targetCompatibility = libs.versions.java.get()
     options.encoding = "UTF-8"
 
     options.errorprone {
@@ -67,7 +60,7 @@ tasks.withType(JavaCompile::class.java).configureEach {
         disable("MissingSummary")
         if (!name.contains("test", true)) {
             check("NullAway", CheckSeverity.ERROR)
-            option("NullAway:AnnotatedPackages", "fr.xpdustry.template")
+            option("NullAway:AnnotatedPackages", project.property("props.root-package").toString())
         }
     }
 }
