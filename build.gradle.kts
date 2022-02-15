@@ -1,4 +1,5 @@
 import fr.xpdustry.toxopid.util.ModMetadata
+import fr.xpdustry.toxopid.extension.ModTarget
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
@@ -10,12 +11,9 @@ plugins {
     `maven-publish`
     alias(libs.plugins.errorprone)
     alias(libs.plugins.toxopid)
-    alias(libs.plugins.indra.git)
+    alias(libs.plugins.versions)
+    alias(libs.plugins.indra)
     alias(libs.plugins.indra.publishing)
-}
-
-repositories {
-    mavenCentral()
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
@@ -23,8 +21,13 @@ group = property("props.project-group").toString()
 version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
 
 toxopid {
+    modTarget.set(ModTarget.HEADLESS)
     arcCompileVersion.set(metadata.minGameVersion)
     mindustryCompileVersion.set(metadata.minGameVersion)
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -35,27 +38,9 @@ dependencies {
     compileOnly(libs.jetbrains.annotations)
     annotationProcessor(libs.nullaway)
     errorprone(libs.errorprone.core)
-    errorproneJavac(libs.errorprone.javac)
-}
-
-java {
-    withSourcesJar()
-    withJavadocJar()
-}
-
-tasks.javadoc {
-    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
-    sourceCompatibility = libs.versions.java.get()
-    targetCompatibility = libs.versions.java.get()
-    options.encoding = "UTF-8"
-
     options.errorprone {
         disableWarningsInGeneratedCode.set(true)
         disable("MissingSummary")
@@ -102,6 +87,12 @@ tasks.jacocoTestReport {
 }
 
 indra {
+    javaVersions {
+        val version = libs.versions.java.get().toInt()
+        target(version)
+        minimumToolchain(version)
+    }
+
     publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
     publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
 
@@ -117,8 +108,6 @@ indra {
     }
 
     configurePublications {
-        from(components["java"])
-
         pom {
             developers {
                 developer { id.set(metadata.author) }
