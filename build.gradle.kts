@@ -4,16 +4,15 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 import java.io.ByteArrayOutputStream
 
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     java
     jacoco
     `maven-publish`
-    alias(libs.plugins.errorprone)
-    alias(libs.plugins.toxopid)
-    alias(libs.plugins.versions)
-    alias(libs.plugins.indra)
-    alias(libs.plugins.indra.publishing)
+    id("net.ltgt.errorprone") version "2.0.2"
+    id("fr.xpdustry.toxopid") version "1.3.1"
+    id("com.github.ben-manes.versions") version "0.42.0"
+    id("net.kyori.indra") version "2.1.1"
+    id("net.kyori.indra.publishing") version "2.1.1"
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
@@ -31,13 +30,15 @@ repositories {
 }
 
 dependencies {
-    // Unit tests
-    testImplementation(libs.junit)
+    val junit = "5.8.2"
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
     // Static analysis
-    compileOnly(libs.jetbrains.annotations)
-    annotationProcessor(libs.nullaway)
-    errorprone(libs.errorprone.core)
+    compileOnly("org.jetbrains:annotations:23.0.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.9.5")
+    errorprone("com.google.errorprone:error_prone_core:2.11.0")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
@@ -69,7 +70,7 @@ tasks.create("createRelease") {
         }
 
         exec {
-            commandLine(arrayListOf("git", "tag", "v${metadata.version}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
+            commandLine(arrayListOf("git", "tag", "${project.version}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
         }
 
         exec {
@@ -88,9 +89,8 @@ tasks.jacocoTestReport {
 
 indra {
     javaVersions {
-        val version = libs.versions.java.get().toInt()
-        target(version)
-        minimumToolchain(version)
+        target(17)
+        minimumToolchain(17)
     }
 
     publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")

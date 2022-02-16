@@ -1,3 +1,5 @@
-Smol but nice release
+Not much to say
 
-- Now, the build script takes full advantage of indra. Resulting in a much smaller build script.
+- Dropped version catalog, use `versions` plugin instead by running the `dependencyUpdates` task.
+- Fixed jitpack version
+- Small changes
