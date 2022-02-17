@@ -30,7 +30,7 @@ This template features some cool stuff such as:
 - `./gradlew jar` for a simple jar that contains only the plugin code.
 - `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
 
-# Nice tips
+## Nice tips
 
 - When using this template, don't forget to change `plugin.json` and `gradle.properties`.
 
