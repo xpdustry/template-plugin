@@ -52,3 +52,5 @@ This template features some cool stuff such as:
     git commit -m "Changing permission of gradlew"
     git push
     ```
+
+- Don't forget to bump your dependencies with the `dependencyUpdates` task.
