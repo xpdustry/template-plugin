@@ -45,7 +45,6 @@ jobs:
           tag=$(echo $tag | cut -d ":" -f 2,3)              # Split with ":" and take the version number
           tag=$(echo $tag | tr -d \"," ")                   # Trim the " and , and spaces
           echo '::set-output name=RELEASE_TAG::'$tag
-          echo '::set-output name=ARTIFACT_PATH::'$(./gradlew getArtifactPath -q)
 
           r=$(cat CHANGELOG.md)
           r="${r//'%'/'%25'}"                               # Multiline escape sequences for %
@@ -62,7 +61,7 @@ jobs:
 
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           asset_name: ${{ github.event.repository.name }}.jar
-          file: ${{ steps.release.outputs.ARTIFACT_PATH }}
+          file: ${{ steps.build.outputs.ARTIFACT_PATH }}
           tag: v${{ steps.release.outputs.RELEASE_TAG }}
 
       - name: Upload artifact to Actions
