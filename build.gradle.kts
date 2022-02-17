@@ -34,8 +34,11 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
+    val jetbrains = "23.0.0"
+    compileOnly("org.jetbrains:annotations:$jetbrains")
+    testCompileOnly("org.jetbrains:annotations:$jetbrains")
+
     // Static analysis
-    compileOnly("org.jetbrains:annotations:23.0.0")
     annotationProcessor("com.uber.nullaway:nullaway:0.9.5")
     errorprone("com.google.errorprone:error_prone_core:2.11.0")
 }
