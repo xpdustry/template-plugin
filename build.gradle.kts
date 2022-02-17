@@ -75,7 +75,7 @@ tasks.create("createRelease") {
         }
 
         exec {
-            commandLine(arrayListOf("git", "tag", "${project.version}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
+            commandLine(arrayListOf("git", "tag", "v${project.version}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
         }
 
         exec {
