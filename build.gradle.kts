@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     java
-    jacoco
     `maven-publish`
     id("net.ltgt.errorprone") version "2.0.2"
     id("fr.xpdustry.toxopid") version "1.3.2"
@@ -79,14 +78,6 @@ tasks.create("createRelease") {
         exec {
             commandLine("git", "push", "origin", "--tags")
         }
-    }
-}
-
-tasks.jacocoTestReport {
-    reports {
-        xml.required.set(true)
-        html.required.set(false)
-        csv.required.set(false)
     }
 }
 
