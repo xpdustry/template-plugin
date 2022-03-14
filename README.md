@@ -13,11 +13,8 @@ This template features some cool stuff such as:
 
 - [Jitpack](https://jitpack.io/) support.
 
-- Gradle tasks for testing:
-    - `./gradlew runMindustryClient`: Run mindustry in desktop.
-    - `./gradlew runMindustryServer`: Run mindustry in a server.
-
 - GitHub action for easier release and Jitpack usage:
+
     - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
       a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run this
       in your terminal:
@@ -31,7 +28,18 @@ This template features some cool stuff such as:
 ## Building
 
 - `./gradlew jar` for a simple jar that contains only the plugin code.
+
 - `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
+
+## Testing
+
+- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
+
+- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
+
+## Running
+
+This plugin is compatible with V6 and V7.
 
 ## Nice tips
 
