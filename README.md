@@ -57,3 +57,5 @@ This plugin is compatible with V6 and V7.
     ```
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
+
+pls run workflow
