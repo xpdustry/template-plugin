@@ -59,3 +59,16 @@ git push
 ```
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
+
+- If you want to use the Xpdustry template, before doing anything, run this in your terminal to set the `xpdustry-master` branch as master :
+
+```batch
+git fetch origin xpdustry-master
+git checkout xpdustry-master
+git branch -m master old-master
+git branch -m xpdustry-master master
+git branch -rD origin/master
+git push origin master -f
+git branch -D old-master
+git push origin --delete xpdustry-master
+```
