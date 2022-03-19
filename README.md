@@ -12,15 +12,15 @@ This template features some cool stuff such as :
 
 - GitHub action for easier release and Jitpack usage:
 
-    - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
-      a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run this
-      in your terminal:
+  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
+    a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run this
+    in your terminal:
 
-      ```batch
-      # https://stackoverflow.com/a/5480292/15861283
-      git push --delete origin v{release-version}
-      git tag -d v{release-version}
-      ```
+    ```batch
+    # https://stackoverflow.com/a/5480292/15861283
+    git push --delete origin v{release-version}
+    git tag -d v{release-version}
+    ```
 
 ## Building
 
@@ -46,14 +46,14 @@ This plugin is compatible with V6 and V7.
 
 - Don't forget to edit `props.root-package` in `gradle.properties` to enable NullAway.
 
-- To make sure gradle is always executable do:
+- To make sure gradle is always executable do :
 
-    ```batch
-    # https://stackoverflow.com/a/54048315/15861283
-    git update-index --chmod=+x gradlew
-    git add .
-    git commit -m "Changing permission of gradlew"
-    git push
-    ```
+```batch
+# https://stackoverflow.com/a/54048315/15861283
+git update-index --chmod=+x gradlew
+git add .
+git commit -m "Changing permission of gradlew"
+git push
+```
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
