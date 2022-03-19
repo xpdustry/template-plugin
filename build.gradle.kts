@@ -6,7 +6,6 @@ import java.io.ByteArrayOutputStream
 
 plugins {
     java
-    `maven-publish`
     id("net.ltgt.errorprone") version "2.0.2"
     id("fr.xpdustry.toxopid") version "1.3.2"
     id("com.github.ben-manes.versions") version "0.42.0"
