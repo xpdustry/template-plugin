@@ -4,12 +4,11 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
-    java
+    id("net.kyori.indra") version "2.1.1"
+    id("net.kyori.indra.publishing") version "2.1.1"
     id("net.ltgt.errorprone") version "2.0.2"
     id("fr.xpdustry.toxopid") version "1.3.2"
     id("com.github.ben-manes.versions") version "0.42.0"
-    id("net.kyori.indra") version "2.1.1"
-    id("net.kyori.indra.publishing") version "2.1.1"
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
