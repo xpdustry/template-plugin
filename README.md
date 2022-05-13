@@ -6,21 +6,15 @@
 
 ## Description
 
-This template features some cool stuff such as :
+Get your Mindustry plugin started with this awesome template repository, it features :
 
 - [Jitpack](https://jitpack.io/) support.
 
-- GitHub action for easier release and Jitpack usage:
+- GitHub actions for easier releases.
 
-  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
-    a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run this
-    in your terminal:
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster development.
 
-    ```batch
-    # https://stackoverflow.com/a/5480292/15861283
-    git push --delete origin v{release-version}
-    git tag -d v{release-version}
-    ```
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier java development.
 
 ## Building
 
@@ -36,24 +30,17 @@ This template features some cool stuff such as :
 
 ## Running
 
-This plugin is compatible with V6 and V7.
+This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 ## Nice tips
 
-- When using this template, don't forget to change `plugin.json` and `gradle.properties`.
-
-- This template targets V6 by default, you can change it by editing `minGameVersion` in `plugin.json`.
-
-- Don't forget to edit `props.root-package` in `gradle.properties` to enable NullAway.
-
-- To make sure gradle is always executable do :
-
-```batch
-# https://stackoverflow.com/a/54048315/15861283
-git update-index --chmod=+x gradlew
-git add .
-git commit -m "Changing permission of gradlew"
-git push
-```
+- When using this template, don't forget to change `plugin.json`, `gradle.properties` and `LiCENSE.md`.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
+
+- How to make a release :
+ 
+  - Create a draft release on GitHub to which you will add elements as you develop.
+
+  - Once you are ready, remove the `-SNAPSHOT` from your plugin version, push it and publish your release.
+    The workflow fill be triggered automatically. After that, put back the `-SNAPSHOT` in your plugin version.
