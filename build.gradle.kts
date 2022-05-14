@@ -2,25 +2,23 @@ import fr.xpdustry.toxopid.util.ModMetadata
 import fr.xpdustry.toxopid.extension.ModTarget
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
-import java.io.ByteArrayOutputStream
 
 plugins {
-    java
+    id("net.kyori.indra") version "2.1.1"
+    id("net.kyori.indra.publishing") version "2.1.1"
     id("net.ltgt.errorprone") version "2.0.2"
     id("fr.xpdustry.toxopid") version "1.3.2"
     id("com.github.ben-manes.versions") version "0.42.0"
-    id("net.kyori.indra") version "2.1.1"
-    id("net.kyori.indra.publishing") version "2.1.1"
 }
 
 val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
 group = property("props.project-group").toString()
-version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
+version = metadata.version
 
 toxopid {
     modTarget.set(ModTarget.HEADLESS)
-    arcCompileVersion.set(metadata.minGameVersion)
-    mindustryCompileVersion.set(metadata.minGameVersion)
+    arcCompileVersion.set("v" + metadata.minGameVersion)
+    mindustryCompileVersion.set("v" + metadata.minGameVersion)
 }
 
 repositories {
@@ -38,8 +36,8 @@ dependencies {
     testCompileOnly("org.jetbrains:annotations:$jetbrains")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.9.5")
-    errorprone("com.google.errorprone:error_prone_core:2.11.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.9.7")
+    errorprone("com.google.errorprone:error_prone_core:2.13.1")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
@@ -53,31 +51,9 @@ tasks.withType(JavaCompile::class.java).configureEach {
     }
 }
 
-// Required if you want to use the Release GitHub action
+// Required by the GitHub actions
 tasks.create("getArtifactPath") {
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
-}
-
-tasks.create("createRelease") {
-    dependsOn("requireClean")
-
-    doLast {
-        // Checks if a signing key is present
-        val signing = ByteArrayOutputStream().use { out ->
-            exec {
-                commandLine("git", "config", "--global", "user.signingkey")
-                standardOutput = out
-            }.run { exitValue == 0 && out.toString().isNotBlank() }
-        }
-
-        exec {
-            commandLine(arrayListOf("git", "tag", "v${metadata.version}", "-F", "./CHANGELOG.md", "-a").apply { if (signing) add("-s") })
-        }
-
-        exec {
-            commandLine("git", "push", "origin", "--tags")
-        }
-    }
 }
 
 signing {
@@ -92,8 +68,8 @@ indra {
         minimumToolchain(17)
     }
 
-    publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
     publishSnapshotsTo("xpdustry", "https://repo.xpdustry.fr/snapshots")
+    publishReleasesTo("xpdustry", "https://repo.xpdustry.fr/releases")
 
     mitLicense()
 
@@ -108,8 +84,15 @@ indra {
 
     configurePublications {
         pom {
+            organization {
+                name.set("Xpdustry")
+                url.set("https://www.xpdustry.fr")
+            }
+
             developers {
-                developer { id.set(metadata.author) }
+                developer {
+                    id.set(metadata.author)
+                }
             }
         }
     }

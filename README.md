@@ -1,28 +1,22 @@
 # TemplatePlugin
 
+[![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/snapshots/fr/xpdustry/template-plugin?color=00FFFF&name=TemplatePlugin&prefix=v)](https://github.com/Xpdustry/TemplatePlugin/releases)
 [![Build status](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml)
 [![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
-[![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/snapshots/fr/xpdustry/template-plugin?color=00FFFF&name=TemplatePlugin&prefix=v)](https://github.com/Xpdustry/TemplatePlugin/releases)
 
 ## Description
 
 **Xpdustry variation for publishing packages to our repo.**
 
-This template features some cool stuff such as:
+Get your Mindustry plugin started with this awesome template repository, it features :
 
 - [Jitpack](https://jitpack.io/) support.
 
-- GitHub action for easier release and Jitpack usage:
+- GitHub actions for easier releases.
 
-  - To create a new release, edit `CHANGELOG.md` and then run `./gradlew createRelease`, it will automatically create
-    a release tag and push it to trigger the release workflow. If you pushed your release by mistake, simply run this
-    in your terminal:
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster development.
 
-    ```batch
-    # https://stackoverflow.com/a/5480292/15861283
-    git push --delete origin v{release-version}
-    git tag -d v{release-version}
-    ```
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier java development.
 
 ## Building
 
@@ -38,37 +32,33 @@ This template features some cool stuff such as:
 
 ## Running
 
-This plugin is compatible with V6 and V7.
+This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 ## Nice tips
 
-- When using this template, don't forget to change `plugin.json` and `gradle.properties`.
-
-- This template targets V6 by default, you can change it by editing `minGameVersion` in `plugin.json`.
-
-- Don't forget to edit `props.root-package` in `gradle.properties` to enable NullAway.
-
-- To make sure gradle is always executable do :
-
-```batch
-# https://stackoverflow.com/a/54048315/15861283
-git update-index --chmod=+x gradlew
-git add .
-git commit -m "Changing permission of gradlew"
-git push
-```
+- When using this template, don't forget to change `plugin.json`, `gradle.properties` and `LiCENSE.md`.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
 
+- Add the changes of your plugin in `CHANGELOG.md` as you develop.
+
+- How to make a release in 3 steps :
+
+  1. Remove the `-SNAPSHOT` from your plugin version in `plugin.json`.
+
+  2. Create a release on GitHub (don't forget to add the changelog). The workflow will be triggered automatically.
+
+  3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
+
 - If you want to use the Xpdustry template, before doing anything, run this in your terminal to set the `xpdustry-master` branch as master :
 
-```batch
-git fetch origin xpdustry-master
-git checkout xpdustry-master
-git branch -m master old-master
-git branch -m xpdustry-master master
-git branch -rD origin/master
-git push origin master -f
-git branch -D old-master
-git push origin --delete xpdustry-master
-```
+  ```batch
+  git fetch origin xpdustry-master
+  git checkout xpdustry-master
+  git branch -m master old-master
+  git branch -m xpdustry-master master
+  git branch -rD origin/master
+  git push origin master -f
+  git branch -D old-master
+  git push origin --delete xpdustry-master
+  ```
