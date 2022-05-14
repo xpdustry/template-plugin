@@ -56,7 +56,7 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
   3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
 
-- If you want to use the Xpdustry template, before doing anything, run this in your terminal to set the `xpdustry-master` branch as master :
+- If you are from Xpdustry, before doing anything, run this in your terminal to set the `xpdustry-master` branch as master :
 
   ```batch
   git fetch origin xpdustry-master
