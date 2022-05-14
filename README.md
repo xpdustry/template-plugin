@@ -12,11 +12,11 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - [Jitpack](https://jitpack.io/) support.
 
-- GitHub actions for easier releases.
+- GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
-- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster development.
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster Mindustry development.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier java development.
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier Java development.
 
 ## Building
 
@@ -36,7 +36,13 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 ## Nice tips
 
-- When using this template, don't forget to change `plugin.json`, `gradle.properties` and `LiCENSE.md`.
+- When using this template, don't forget to :
+
+  - Change `plugin.json` and `gradle.properties`.
+
+  - Update `LiCENSE.md` with your name and/or replace it with your own license.
+
+  - Reset `CHANGELOG.md`.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
 
