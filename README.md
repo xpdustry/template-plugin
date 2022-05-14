@@ -38,9 +38,12 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
 
-- How to make a release :
- 
-  - Create a draft release on GitHub to which you will add elements as you develop.
+- Add the changes of your plugin in `CHANGELOG.md` as you develop.
 
-  - Once you are ready, remove the `-SNAPSHOT` from your plugin version, push it and publish your release.
-    The workflow fill be triggered automatically. After that, put back the `-SNAPSHOT` in your plugin version.
+- How to make a release in 3 steps :
+
+  1. Remove the `-SNAPSHOT` from your plugin version in `plugin.json`.
+
+  2. Create a release on GitHub (don't forget to add the changelog). The workflow will be triggered automatically.
+
+  3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
