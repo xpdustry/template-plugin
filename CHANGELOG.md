@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Information about shading in the `README.md`.
 
+### Fixed
+
+- Typos in the `README.md`.
+
 ## [v2.5.0] - 2022-05-17
 
 ### Added

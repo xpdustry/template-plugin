@@ -14,10 +14,10 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
-- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster
   Mindustry development.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier Java
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier Java
   development.
 
     - This template also comes with `indra.license-header` to apply the project license in every source file.
@@ -43,7 +43,7 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 ## Running
 
-This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
+This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 ## Nice tips
 
@@ -68,7 +68,7 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
 
-- If you want to expose some of your plugin dependencies, or you are using sql drivers, you will have to shade all your
+- If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade all your
   dependencies manually by replacing :
 
   ```gradle
