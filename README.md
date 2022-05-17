@@ -12,15 +12,23 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
-- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster Mindustry development.
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) gradle plugin for faster
+  Mindustry development.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier Java development.
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier Java
+  development.
+
+  - This template also comes with `indra.license-header` to apply the project license in every source file.
+
+- Jar bundling and automatic shading with the [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
+  The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
 
 ## Building
 
 - `./gradlew jar` for a simple jar that contains only the plugin code.
 
-- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for your server).
+- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for
+  your server).
 
 ## Testing
 
@@ -36,11 +44,11 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 - When using this template, don't forget to :
 
-  - Change `plugin.json` and `gradle.properties`.
+    - Change `plugin.json` and `gradle.properties`.
 
-  - Update `LiCENSE.md` with your name and/or replace it with your own license.
+    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name and/or replace them with your own license.
 
-  - Reset `CHANGELOG.md`.
+    - Reset `CHANGELOG.md`.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
 
@@ -48,8 +56,21 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 - How to make a release in 3 steps :
 
-  1. Remove the `-SNAPSHOT` from your plugin version in `plugin.json`.
+    1. Remove the `-SNAPSHOT` from your plugin version in `plugin.json`.
 
-  2. Create a release on GitHub (don't forget to add the changelog). The workflow will be triggered automatically.
+    2. Create a release on GitHub (don't forget to add the changelog). The workflow will be
+       triggered automatically.
 
-  3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
+    3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
+
+- If you want to expose some of your plugin dependencies, or you are using sql drivers, exclude them in the `shadowJar`
+  task with :
+
+  ```gradle
+  tasks.shadowJar {
+      minimize {
+          exclude(dependency("the-group:the-artifact:.*"))
+          // ...
+      }
+  }
+  ```
