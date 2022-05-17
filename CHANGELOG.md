@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - yyyy-mm-dd
 
+## [v2.4.5] - 2022-05-17
+
 ### Added
 
 - Added automatic shading task.
