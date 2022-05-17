@@ -64,7 +64,10 @@ val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
     prefix = project.property("props.root-package").toString() + ".shadow"
 }
 
-tasks.shadowJar.get().dependsOn(relocate)
+tasks.shadowJar {
+    dependsOn(relocate)
+    minimize()
+}
 
 license {
     header(rootProject.file("LICENSE_HEADER.md"))

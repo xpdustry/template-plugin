@@ -23,7 +23,10 @@ Get your Mindustry plugin started with this awesome template repository, it feat
   - This template also comes with `indra.license-header` to apply the project license in every source file.
 
 - Jar bundling and automatic shading with the [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
-  The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+
+  - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+
+  - The bundled jar is stripped from every unused classes.
 
 ## Building
 
@@ -65,14 +68,33 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
 
-- If you want to expose some of your plugin dependencies, or you are using sql drivers, exclude them in the `shadowJar`
-  task with :
+- If you want to expose some of your plugin dependencies, or you are using sql drivers, you will have to shade all your dependencies manually
+  by replacing :
+
+  ```gradle
+  val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
+      target = tasks.shadowJar.get()
+      prefix = project.property("props.root-package").toString() + ".shadow"
+  }
+
+  tasks.shadowJar {
+      dependsOn(relocate)
+      minimize()
+  }
+  ```
+  
+  With :
 
   ```gradle
   tasks.shadowJar {
+      val shadowPackage = project.property("props.root-package").toString() + ".shadow"
+      // Put the internal dependencies here
+      relocate("com.example.artifact1", "$shadowPackage.artifact1")
+      relocate("com.example.artifact2", "$shadowPackage.artifact2")
       minimize {
-          exclude(dependency("the-group:the-artifact:.*"))
-          // ...
+          // Put the exposed dependencies and sql drivers here
+          exclude(dependency("com.example:artifact3:.*"))
+          exclude(dependency("com.example:some-sql-driver:.*"))
       }
   }
   ```
