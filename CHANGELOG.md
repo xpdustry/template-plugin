@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased] - yyyy-mm-dd
 
+## [v2.5.1] - 2022-05-17
+
 ### Added
 
 - Information about shading in the `README.md`.
