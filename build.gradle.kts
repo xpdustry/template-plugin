@@ -1,11 +1,14 @@
-import fr.xpdustry.toxopid.util.ModMetadata
+import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
 import fr.xpdustry.toxopid.extension.ModTarget
+import fr.xpdustry.toxopid.util.ModMetadata
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
+import org.cadixdev.gradle.licenser.header.HeaderStyle
 
 plugins {
     id("net.kyori.indra") version "2.1.1"
     id("net.kyori.indra.publishing") version "2.1.1"
+    id("net.kyori.indra.license-header") version "2.1.1"
     id("net.ltgt.errorprone") version "2.0.2"
     id("fr.xpdustry.toxopid") version "1.3.2"
     id("com.github.ben-manes.versions") version "0.42.0"
@@ -54,6 +57,21 @@ tasks.withType(JavaCompile::class.java).configureEach {
 // Required by the GitHub actions
 tasks.create("getArtifactPath") {
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
+}
+
+val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
+    target = tasks.shadowJar.get()
+    prefix = project.property("props.root-package").toString() + ".shadow"
+}
+
+tasks.shadowJar.get().dependsOn(relocate)
+
+license {
+    header(rootProject.file("LICENSE_HEADER.md"))
+    style["java"] = HeaderStyle.DOUBLE_SLASH.format
+    style["kt"] = HeaderStyle.DOUBLE_SLASH.format
+    style["groovy"] = HeaderStyle.DOUBLE_SLASH.format
+    style["scala"] = HeaderStyle.DOUBLE_SLASH.format
 }
 
 signing {
