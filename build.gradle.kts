@@ -68,12 +68,15 @@ val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
 }
 
 tasks.shadowJar {
+    // Run relocation before shadow
     dependsOn(relocate)
+    // Reduces shadow jar size by removing unused classes
     minimize()
 }
 
 license {
     header(rootProject.file("LICENSE_HEADER.md"))
+    // Double slashes are easier to handle
     style["java"] = HeaderStyle.DOUBLE_SLASH.format
     style["kt"] = HeaderStyle.DOUBLE_SLASH.format
     style["groovy"] = HeaderStyle.DOUBLE_SLASH.format
