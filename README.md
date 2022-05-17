@@ -20,13 +20,13 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 - [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) gradle plugin for easier Java
   development.
 
-  - This template also comes with `indra.license-header` to apply the project license in every source file.
+    - This template also comes with `indra.license-header` to apply the project license in every source file.
 
 - Jar bundling and automatic shading with the [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
-  - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+    - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
 
-  - The bundled jar is stripped from every unused classes.
+    - The bundled jar is stripped from every unused classes.
 
 ## Building
 
@@ -68,8 +68,8 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
 
-- If you want to expose some of your plugin dependencies, or you are using sql drivers, you will have to shade all your dependencies manually
-  by replacing :
+- If you want to expose some of your plugin dependencies, or you are using sql drivers, you will have to shade all your
+  dependencies manually by replacing :
 
   ```gradle
   val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
@@ -82,7 +82,7 @@ This plugin is runs on Java 17 and is compatible with Mindustry V6 and V7.
       minimize()
   }
   ```
-  
+
   With :
 
   ```gradle
