@@ -57,16 +57,9 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
 - Don't forget to bump your dependencies with the `dependencyUpdates` task.
 
-- Add the changes of your plugin in `CHANGELOG.md` as you develop.
-
-- How to make a release in 3 steps :
-
-    1. Remove the `-SNAPSHOT` from your plugin version in `plugin.json`.
-
-    2. Create a release on GitHub (don't forget to add the changelog). The workflow will be
-       triggered automatically.
-
-    3. Put back the `-SNAPSHOT` in your plugin version in `plugin.json`.
+- The release process and changelog is handled by [release-please](https://github.com/marketplace/actions/release-please-action).
+  So to take full advantage of it, follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/)
+  specification and once ready, merge the pull request of release-please to publish your release.
 
 - If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade all your
   dependencies manually by replacing :
