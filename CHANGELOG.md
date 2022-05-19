@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 * fix branch name in release-please ([ba2f978](https://github.com/Xpdustry/TemplatePlugin/commit/ba2f978c33bac4993f316eb58f062f8a18c007fa))
 
-## [v2.5.1] - 2022-05-17
+## [v2.5.1](https://github.com/Xpdustry/TemplatePlugin/compare/v2.5.0...v2.5.1) - (2022-05-17)
 
 ### Added
 
@@ -25,7 +25,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Typos in the `README.md`.
 
-## [v2.5.0] - 2022-05-17
+## [v2.5.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.4.0...v2.5.0) - (2022-05-17)
 
 ### Added
 
@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - A little bit of formatting :^).
 
-## [v2.4.0] - 2022-05-14
+## [v2.4.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.3.2...v2.4.0) - (2022-05-14)
 
 ### Changed
 
