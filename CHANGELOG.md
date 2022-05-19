@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### [2.6.1](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.0...v2.6.1) (2022-05-19)
+
+
+### Bug Fixes
+
+* Update changelog to follow release-please style ([9fdd102](https://github.com/Xpdustry/TemplatePlugin/commit/9fdd102941d30f3c386d6612d23ed92d3adfd968))
+
 ## [2.6.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.5.1...v2.6.0) (2022-05-19)
 
 ### Features
