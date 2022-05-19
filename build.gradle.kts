@@ -3,7 +3,6 @@ import fr.xpdustry.toxopid.extension.ModTarget
 import fr.xpdustry.toxopid.util.ModMetadata
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
-import org.cadixdev.gradle.licenser.header.HeaderStyle
 
 plugins {
     id("net.kyori.indra") version "2.1.1"
@@ -76,11 +75,6 @@ tasks.shadowJar {
 
 license {
     header(rootProject.file("LICENSE_HEADER.md"))
-    // Double slashes are easier to handle
-    style["java"] = HeaderStyle.DOUBLE_SLASH.format
-    style["kt"] = HeaderStyle.DOUBLE_SLASH.format
-    style["groovy"] = HeaderStyle.DOUBLE_SLASH.format
-    style["scala"] = HeaderStyle.DOUBLE_SLASH.format
 }
 
 indra {
