@@ -1,4 +1,9 @@
 {
+  "packages": {
+    ".": {
+      "release-type": "java"
+    }
+  },
   "extra-files": [
     {
       "type": "json",
