@@ -12,7 +12,3 @@ jobs:
       - uses: google-github-actions/release-please-action@v3
         with:
           release-type: java
-          package-name: release-please-action
-          extra-files: |
-            README.md
-            plugin.json
