@@ -1,6 +1,7 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-import fr.xpdustry.toxopid.extension.ModTarget
 import fr.xpdustry.toxopid.util.ModMetadata
+import fr.xpdustry.toxopid.util.anukenJitpack
+import fr.xpdustry.toxopid.util.mindustryDependencies
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
@@ -9,25 +10,26 @@ plugins {
     id("net.kyori.indra.publishing") version "2.1.1"
     id("net.kyori.indra.license-header") version "2.1.1"
     id("net.ltgt.errorprone") version "2.0.2"
-    id("fr.xpdustry.toxopid") version "1.3.2"
-    id("com.github.ben-manes.versions") version "0.42.0"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
+    id("fr.xpdustry.toxopid") version "2.0.0"
 }
 
-val metadata = ModMetadata(file("${rootProject.rootDir}/plugin.json"))
+val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = property("props.project-group").toString()
 version = metadata.version
 
 toxopid {
-    modTarget.set(ModTarget.HEADLESS)
-    arcCompileVersion.set("v" + metadata.minGameVersion)
-    mindustryCompileVersion.set("v" + metadata.minGameVersion)
+    platforms.add(fr.xpdustry.toxopid.ModPlatform.HEADLESS)
 }
 
 repositories {
     mavenCentral()
+    anukenJitpack()
 }
 
 dependencies {
+    mindustryDependencies()
+
     val junit = "5.8.2"
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
@@ -56,21 +58,28 @@ tasks.withType(JavaCompile::class.java).configureEach {
 // Disables the signing task, removes this line only if you know what you are doing
 tasks.signMavenPublication.get().enabled = false
 
-// Required by the GitHub actions
+// Required for the GitHub actions
 tasks.create("getArtifactPath") {
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
 }
 
+// Relocates dependencies
 val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
     target = tasks.shadowJar.get()
     prefix = project.property("props.root-package").toString() + ".shadow"
 }
 
 tasks.shadowJar {
+    // Include the plugin.json file
+    from(project.file("plugin.json"))
     // Run relocation before shadow
     dependsOn(relocate)
-    // Reduces shadow jar size by removing unused classes
+    // Reduce shadow jar size by removing unused classes
     minimize()
+    // Include the license of your project
+    from(rootProject.file("LICENSE.md")) {
+        into("META-INF")
+    }
 }
 
 license {
@@ -83,10 +92,11 @@ indra {
         minimumToolchain(17)
     }
 
+    // The license of your project, use gpl3OnlyLicense() if your project is under GPL3
     mitLicense()
 
-    if (metadata.repo != null) {
-        val repo = metadata.repo!!.split("/")
+    if (metadata.repo.isNotBlank()) {
+        val repo = metadata.repo.split("/")
         github(repo[0], repo[1]) {
             ci(true)
             issues(true)

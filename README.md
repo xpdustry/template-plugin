@@ -53,8 +53,6 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     - Reset `CHANGELOG.md`.
 
-- Don't forget to bump your dependencies with the `dependencyUpdates` task.
-
 - The release process and changelog is handled by [release-please](https://github.com/marketplace/actions/release-please-action).
   So to take full advantage of it, follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/)
   specification and once ready, merge the pull request of release-please to publish your release.
