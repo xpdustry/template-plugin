@@ -54,13 +54,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 * Added automatic shading task.
-
 * Added `indra.license-header` for license headers in files.
 
 ### Changed
 
 * Updated `README.md` to be more explicit.
-
 * A little bit of formatting :^).
 
 ## [v2.4.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.3.2...v2.4.0) - (2022-05-14)
