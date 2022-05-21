@@ -19,6 +19,7 @@ group = property("props.project-group").toString()
 version = metadata.version
 
 toxopid {
+    compileVersion.set("v" + metadata.minGameVersion)
     platforms.add(fr.xpdustry.toxopid.ModPlatform.HEADLESS)
 }
 
