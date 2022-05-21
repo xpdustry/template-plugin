@@ -1,4 +1,6 @@
 /*
+ * This file is part of TemplatePlugin, a simple template plugin for Mindustry.
+ *
  * MIT License
  *
  * Copyright (c) 2021 Xpdustry

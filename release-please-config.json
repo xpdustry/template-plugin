@@ -1,0 +1,14 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "java"
+    }
+  },
+  "extra-files": [
+    {
+      "type": "json",
+      "path": "plugin.json",
+      "jsonpath": "$.version"
+    }
+  ]
+}
