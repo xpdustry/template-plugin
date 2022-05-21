@@ -1,13 +1,7 @@
 {
   "packages": {
     ".": {
-      "releaseType": "java",
-      "draft": false,
-      "prerelease": false,
-      "bumpMinorPreMajor": false,
-      "bumpPatchForMinorPreMajor": false,
-      "changelogPath": "CHANGELOG.md",
-      "versioning": "default"
+      "release-type": "java"
     }
   },
   "extra-files": [
