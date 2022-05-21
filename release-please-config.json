@@ -1,9 +1,6 @@
 {
   "packages": {
     ".": {
-      "release-type": "java"
-    },
-    "undefined": {
       "releaseType": "java",
       "draft": false,
       "prerelease": false,
