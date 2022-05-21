@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [3.0.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.1...v3.0.0) (2022-05-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* Move to toxopid 2.0.0
+
+### Features
+
+* Move to toxopid 2.0.0 ([9208e3c](https://github.com/Xpdustry/TemplatePlugin/commit/9208e3ce21b76437dccd65e510085f13c6540bbb))
+
+
+### Bug Fixes
+
+* pls release-please, work ([ed558ee](https://github.com/Xpdustry/TemplatePlugin/commit/ed558ee00ed440400be6d1b1bf32cb7af0e5f203))
+* remove comment in release-please.yml ([1fb8259](https://github.com/Xpdustry/TemplatePlugin/commit/1fb8259d931111371eb0f1c8f3915e97469456e1))
+* updated license header ([fde8c59](https://github.com/Xpdustry/TemplatePlugin/commit/fde8c594acac66768d86cf372cda8ab604b13823))
+
 ### [2.6.1](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.0...v2.6.1) (2022-05-19)
 
 ### Bug Fixes
@@ -36,13 +54,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 * Added automatic shading task.
-
 * Added `indra.license-header` for license headers in files.
 
 ### Changed
 
 * Updated `README.md` to be more explicit.
-
 * A little bit of formatting :^).
 
 ## [v2.4.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.3.2...v2.4.0) - (2022-05-14)
