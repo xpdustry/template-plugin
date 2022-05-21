@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### [2.6.1](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.0...v2.6.1) (2022-05-19)
 
-
 ### Bug Fixes
 
 * Update changelog to follow release-please style ([9fdd102](https://github.com/Xpdustry/TemplatePlugin/commit/9fdd102941d30f3c386d6612d23ed92d3adfd968))
@@ -26,28 +25,28 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Added
 
-- Information about shading in the `README.md`.
+* Information about shading in the `README.md`.
 
 ### Fixed
 
-- Typos in the `README.md`.
+* Typos in the `README.md`.
 
 ## [v2.5.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.4.0...v2.5.0) - (2022-05-17)
 
 ### Added
 
-- Added automatic shading task.
+* Added automatic shading task.
 
-- Added `indra.license-header` for license headers in files.
+* Added `indra.license-header` for license headers in files.
 
 ### Changed
 
-- Updated `README.md` to be more explicit.
+* Updated `README.md` to be more explicit.
 
-- A little bit of formatting :^).
+* A little bit of formatting :^).
 
 ## [v2.4.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.3.2...v2.4.0) - (2022-05-14)
 
 ### Changed
 
-- Improved the usability of the Template.
+* Improved the usability of the Template.
