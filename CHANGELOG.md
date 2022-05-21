@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### [3.0.2](https://github.com/Xpdustry/TemplatePlugin/compare/v3.0.1...v3.0.2) (2022-05-21)
+
+
+### Bug Fixes
+
+* fix broken release ([b6581a4](https://github.com/Xpdustry/TemplatePlugin/commit/b6581a477826d19cf62dbe632c82d3f3d20edb64))
+
 ### [3.0.1](https://github.com/Xpdustry/TemplatePlugin/compare/v3.0.0...v3.0.1) (2022-05-21)
 
 
