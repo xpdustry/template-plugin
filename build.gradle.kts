@@ -58,6 +58,7 @@ tasks.withType(JavaCompile::class.java).configureEach {
 
 // Required for the GitHub actions
 tasks.create("getArtifactPath") {
+    dependsOn(tasks.shadowJar)
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
 }
 
