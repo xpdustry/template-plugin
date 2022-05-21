@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+### [3.0.1](https://github.com/Xpdustry/TemplatePlugin/compare/v3.0.0...v3.0.1) (2022-05-21)
+
+
+### Bug Fixes
+
+* Added forgotten line for mindustry compile version ([e03bffc](https://github.com/Xpdustry/TemplatePlugin/commit/e03bffcb936c61fef663954a99eb1a9f696b3315))
+
 ## [3.0.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.1...v3.0.0) (2022-05-21)
 
 
