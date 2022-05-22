@@ -27,13 +27,17 @@ jobs:
           fi
           echo "::set-output name=tag::$tag";
 
+      - name: Get Changelog Config
+        id: changelog-config
+        run: echo "::set-output name=config::"$(readlink -f .github/release-drafter-config.json)
+
       - name: Generate Changelog
         uses: dlavrenuek/conventional-changelog-action@v1.2.0
         id: changelog
         with:
           from: ${{ steps.current-tag.outputs.tag }}
           to: HEAD
-          config-file: ./.github/release-drafter-config.json
+          config-file: ${{ steps.changelog-config.outputs.config }}
 
       - name: Parse Current Tag
         id: semver
