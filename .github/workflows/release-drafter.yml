@@ -17,13 +17,13 @@ jobs:
 
       - name: Get Latest Released Tag
         id: current-tag
-        run: |-
+        run: |
           branch=${GITHUB_REF#refs/heads/}
           tag=$( git tag -l --merged "$branch" "v*.*.*" --sort=-committerdate | head -n 1 );
           echo "::set-output name=tag::$tag";
 
       - name: Generate Changelog
-        uses: dlavrenuek/conventional-changelog-action@v1
+        uses: dlavrenuek/conventional-changelog-action@v1.2.0
         id: changelog
         with:
           from: ${{ steps.current-tag.outputs.tag }}
