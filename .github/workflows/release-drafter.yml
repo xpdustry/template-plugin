@@ -29,7 +29,9 @@ jobs:
 
       - name: Get Changelog Config
         id: changelog-config
-        run: echo "::set-output name=config::"$(readlink -f .github/release-drafter-config.json)
+        run: |
+          echo "::set-output name=config::"$(readlink -f .github/release-drafter-config.json)
+          echo $(readlink -f .github/release-drafter-config.json)
 
       - name: Generate Changelog
         uses: dlavrenuek/conventional-changelog-action@v1.2.0
