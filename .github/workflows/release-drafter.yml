@@ -33,7 +33,7 @@ jobs:
         with:
           from: ${{ steps.current-tag.outputs.tag }}
           to: HEAD
-          config-file: .github/release-drafter-config.json
+          config-file: ./.github/release-drafter-config.json
 
       - name: Parse Current Tag
         id: semver

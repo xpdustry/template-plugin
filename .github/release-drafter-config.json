@@ -6,7 +6,7 @@
     },
     {
       "title": "🚀 New Features",
-      "types": ["feat"]
+      "types": ["feat", "feature"]
     },
     {
       "title": "💊 Bugfixes",
@@ -39,6 +39,10 @@
     {
       "title": "💃 Styling",
       "types": ["style"]
+    },
+    {
+      "title": "\uD83D\uDCD6 Documentation",
+      "types": ["docs"]
     }
   ],
   "sortOrder": "desc",
