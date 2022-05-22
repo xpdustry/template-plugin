@@ -49,7 +49,11 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     - Change `plugin.json` and `gradle.properties`.
 
-    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name and/or replace them with your own license.
+    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name or replace them with your own license.
+
+      > if you do replace the license, change also the license property in the `indra` configuration of the build
+      script, more info in the
+      [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
     - Reset `CHANGELOG.md` and `.release-please-manifest.json`.
 
