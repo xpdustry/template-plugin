@@ -9,7 +9,7 @@ on:
     types: [ released ]
 
 concurrency:
-  group: "${{ github.workflow }}-${{ github.event.number || github.ref }}"
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -27,7 +27,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           java-version: 17
-          distribution: 'temurin'
+          distribution: temurin
 
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -35,16 +35,8 @@ jobs:
       - name: Build Artifact
         uses: gradle/gradle-build-action@v2
         with:
-          cache-read-only: "${{ !startsWith(github.ref, 'refs/heads/master/') || github.event_name == 'pull_request' }}"
-          arguments: "build"
-
-      - name: Determine Status
-        run: |
-          if [ "$(./gradlew properties | awk '/^version:/ { print $2; }' | grep '\-SNAPSHOT')" ]; then
-            echo "STATUS=snapshot" >> $GITHUB_ENV
-          else
-            echo "STATUS=release" >> $GITHUB_ENV
-          fi
+          cache-read-only: ${{ !startsWith(github.ref, 'refs/heads/master/') || github.event_name == 'pull_request' }}
+          arguments: build
 
       - name: Set up Artifact Upload
         id: upload
@@ -64,3 +56,18 @@ jobs:
           asset_name: ${{ github.event.repository.name }}.jar
           file: ${{ steps.upload.outputs.ARTIFACT_PATH }}
           tag: ${{ github.ref }}
+
+      - name: Update Changelog
+        if: "${{ env.STATUS == 'release' && github.event_name == 'release' }}"
+        uses: stefanzweifel/changelog-updater-action@v1
+        with:
+          latest-version: ${{ github.event.release.tag_name }}
+          release-notes: ${{ github.event.release.body }}
+
+      - name: Commit Updated Changelog
+        if: "${{ env.STATUS == 'release' && github.event_name == 'release' }}"
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: ${{ github.event.release.target_commitish }}
+          commit_message: Update CHANGELOG
+          file_pattern: CHANGELOG.md

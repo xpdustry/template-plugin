@@ -17,8 +17,8 @@ plugins {
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = property("props.project-group").toString()
-version = metadata.version
 description = metadata.description
+version = metadata.version
 
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
@@ -84,6 +84,8 @@ tasks.shadowJar {
         into("META-INF")
     }
 }
+
+tasks.build.get().dependsOn(tasks.shadowJar)
 
 license {
     header(rootProject.file("LICENSE_HEADER.md"))

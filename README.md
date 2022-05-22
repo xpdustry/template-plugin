@@ -55,7 +55,7 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
       script, more info in the
       [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
-    - Reset `CHANGELOG.md` and `.release-please-manifest.json`.
+    - Reset `CHANGELOG.md`.
 
 - The release process and changelog is handled
   by [release-please](https://github.com/marketplace/actions/release-please-action).
