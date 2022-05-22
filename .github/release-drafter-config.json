@@ -1,0 +1,46 @@
+{
+  "typeLabels": [
+    {
+      "title": "⚡️ Breaking Changes",
+      "types": ["breaking"]
+    },
+    {
+      "title": "🚀 New Features",
+      "types": ["feat"]
+    },
+    {
+      "title": "💊 Bugfixes",
+      "types": ["fix"]
+    },
+    {
+      "title": "🧹 Chore",
+      "types": ["chore"]
+    },
+    {
+      "title": "♻️ Refactors",
+      "types": ["refactor"]
+    },
+    {
+      "title": "‍🔧 Performance Improvements",
+      "types": ["perf"]
+    },
+    {
+      "title": "🥼 Testing",
+      "types": ["test"]
+    },
+    {
+      "title": "🚢 Build",
+      "types": ["build"]
+    },
+    {
+      "title": "♾️ Continuous Integration",
+      "types": ["ci"]
+    },
+    {
+      "title": "💃 Styling",
+      "types": ["style"]
+    }
+  ],
+  "sortOrder": "desc",
+  "emptyMessage": "No changes"
+}
