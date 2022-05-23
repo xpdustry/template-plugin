@@ -33,6 +33,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Added forgotten line for mindustry compile version ([e03bffc](https://github.com/Xpdustry/TemplatePlugin/commit/e03bffcb936c61fef663954a99eb1a9f696b3315))
 
+## v3.1.0 - 2022-05-23
+
+### 🚀 New Features
+
+- Release drafter is now a manual workflow
+
 ## [v3.0.0](https://github.com/Xpdustry/TemplatePlugin/compare/v2.6.1...v3.0.0) (2022-05-21)
 
 ### ⚠ BREAKING CHANGES
