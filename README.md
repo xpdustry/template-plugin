@@ -51,14 +51,17 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     - Change `plugin.json` and `gradle.properties`.
 
-    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name and/or replace them with your own license.
+    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name or replace them with your own license.
 
-    - Reset `CHANGELOG.md` and `.release-please-manifest.json`.
+      > if you do replace the license, change also the license property in the `indra` configuration of the build
+      script, more info in the
+      [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
-- The release process and changelog is handled
-  by [release-please](https://github.com/marketplace/actions/release-please-action).
-  So to take full advantage of it, follow the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/)
-  specification and once ready, merge the pull request of release-please to publish your release.
+    - Reset `CHANGELOG.md`.
+
+- The changelog can be automatically generated to a draft release by the release-drafter workflow using 
+  the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) specification.
+  When publishing the release, the changelog will be automatically committed to the `CHANGELOG.md` file.
 
 - If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade all your
   dependencies manually by replacing :

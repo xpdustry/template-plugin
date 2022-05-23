@@ -1,4 +1,5 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
+import fr.xpdustry.toxopid.ModPlatform
 import fr.xpdustry.toxopid.util.ModMetadata
 import fr.xpdustry.toxopid.util.anukenJitpack
 import fr.xpdustry.toxopid.util.mindustryDependencies
@@ -16,11 +17,12 @@ plugins {
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = property("props.project-group").toString()
+description = metadata.description
 version = metadata.version
 
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
-    platforms.add(fr.xpdustry.toxopid.ModPlatform.HEADLESS)
+    platforms.add(ModPlatform.HEADLESS)
 }
 
 repositories {
@@ -58,7 +60,6 @@ tasks.withType(JavaCompile::class.java).configureEach {
 
 // Required for the GitHub actions
 tasks.create("getArtifactPath") {
-    dependsOn(tasks.shadowJar)
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
 }
 
@@ -80,6 +81,8 @@ tasks.shadowJar {
         into("META-INF")
     }
 }
+
+tasks.build.get().dependsOn(tasks.shadowJar)
 
 license {
     header(rootProject.file("LICENSE_HEADER.md"))
