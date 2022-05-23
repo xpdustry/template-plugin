@@ -66,7 +66,7 @@ jobs:
           ORG_GRADLE_PROJECT_signingPassword: "${{ secrets.XPDUSTRY_SIGNING_PASSWORD }}"
 
       - name: Upload Artifact to Release
-        if: "${{ env.STATUS == 'release' && github.event_name == 'release' }}"
+        if: ${{ env.STATUS == 'release' && github.event_name == 'release' }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
@@ -75,14 +75,14 @@ jobs:
           tag: ${{ github.ref }}
 
       - name: Update Changelog
-        if: "${{ env.STATUS == 'release' && github.event_name == 'release' }}"
+        if: ${{ env.STATUS == 'release' && github.event_name == 'release' }}
         uses: stefanzweifel/changelog-updater-action@v1
         with:
           latest-version: ${{ github.event.release.tag_name }}
           release-notes: ${{ github.event.release.body }}
 
       - name: Commit Updated Changelog
-        if: "${{ env.STATUS == 'release' && github.event_name == 'release' }}"
+        if: ${{ env.STATUS == 'release' && github.event_name == 'release' }}
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           branch: ${{ github.event.release.target_commitish }}
