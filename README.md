@@ -57,7 +57,7 @@ This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
 
     - Reset `CHANGELOG.md`.
 
-- The changelog is automatically generated to a draft release for each push on the master branch using 
+- The changelog can be automatically generated to a draft release by the release-drafter workflow using 
   the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) specification.
   When publishing the release, the changelog will be automatically committed to the `CHANGELOG.md` file.
 
