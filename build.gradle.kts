@@ -7,18 +7,20 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
-    id("net.kyori.indra") version "2.1.1"
-    id("net.kyori.indra.publishing") version "2.1.1"
-    id("net.kyori.indra.license-header") version "2.1.1"
+    id("net.kyori.indra") version "3.0.0"
+    id("net.kyori.indra.publishing") version "3.0.0"
+    id("net.kyori.indra.git") version "3.0.0"
+    id("net.kyori.indra.licenser.spotless") version "3.0.0"
     id("net.ltgt.errorprone") version "2.0.2"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("fr.xpdustry.toxopid") version "2.0.0"
+    id("fr.xpdustry.toxopid") version "2.1.1"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = property("props.project-group").toString()
-description = metadata.description
+metadata.version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
 version = metadata.version
+description = metadata.description
 
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
@@ -33,7 +35,7 @@ repositories {
 dependencies {
     mindustryDependencies()
 
-    val junit = "5.8.2"
+    val junit = "5.9.0"
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
@@ -43,8 +45,8 @@ dependencies {
     testCompileOnly("org.jetbrains:annotations:$jetbrains")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.9.7")
-    errorprone("com.google.errorprone:error_prone_core:2.13.1")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.1")
+    errorprone("com.google.errorprone:error_prone_core:2.15.0")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
@@ -73,12 +75,16 @@ val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
 }
 
 tasks.shadowJar {
-    // Include the plugin.json file
-    from(project.file("plugin.json"))
-    // Run relocation before shadow
+    // Configure the dependencies shading
     dependsOn(relocate)
     // Reduce shadow jar size by removing unused classes
     minimize()
+    // Include the plugin.json file with the modified version
+    doFirst {
+        val temp = temporaryDir.resolve("plugin.json")
+        temp.writeText(metadata.toJson(true))
+        from(temp)
+    }
     // Include the license of your project
     from(rootProject.file("LICENSE.md")) {
         into("META-INF")
@@ -86,10 +92,6 @@ tasks.shadowJar {
 }
 
 tasks.build.get().dependsOn(tasks.shadowJar)
-
-license {
-    header(rootProject.file("LICENSE_HEADER.md"))
-}
 
 indra {
     javaVersions {
@@ -118,4 +120,13 @@ indra {
             }
         }
     }
+}
+
+indraSpotlessLicenser {
+    licenseHeaderFile(rootProject.file("LICENSE_HEADER.md"))
+    // Some properties to make updating the licence header easier
+    property("NAME", metadata.displayName)
+    property("DESCRIPTION", metadata.description)
+    property("AUTHOR", metadata.author)
+    property("YEAR", property("props.project-year").toString())
 }

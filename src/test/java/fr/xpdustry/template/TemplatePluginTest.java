@@ -1,5 +1,5 @@
 /*
- * This file is part of TemplatePlugin, a simple template plugin for Mindustry.
+ * This file is part of TemplatePlugin. A template for faster plugin development.
  *
  * MIT License
  *

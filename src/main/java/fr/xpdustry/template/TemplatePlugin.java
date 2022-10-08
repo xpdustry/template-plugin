@@ -1,5 +1,5 @@
 /*
- * This file is part of TemplatePlugin, a simple template plugin for Mindustry.
+ * This file is part of TemplatePlugin. A template for faster plugin development.
  *
  * MIT License
  *
@@ -48,13 +48,13 @@ public class TemplatePlugin extends Plugin {
      * This method is called when the game register the server-side commands.
      */
     @Override
-    public void registerServerCommands(@NotNull CommandHandler handler) {
+    public void registerServerCommands(final @NotNull CommandHandler handler) {
     }
 
     /**
      * This method is called when the game register the client-side commands.
      */
     @Override
-    public void registerClientCommands(@NotNull CommandHandler handler) {
+    public void registerClientCommands(final @NotNull CommandHandler handler) {
     }
 }

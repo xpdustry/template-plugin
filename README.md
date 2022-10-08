@@ -8,23 +8,33 @@
 
 Get your Mindustry plugin started with this awesome template repository, it features :
 
-- [Jitpack](https://jitpack.io/) support.
+- [Jitpack](https://jitpack.io/) support for using the project as a library.
 
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
-- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster
-  Mindustry development.
+- [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster Mindustry plugin
+  development and testing.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier Java
-  development.
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier project development.
 
-    - This template also comes with `indra.license-header` to apply the project license in every source file.
+    - It also comes with `indra.licenser-spotless`, an indra extension enabling the usage of [spotless](https://github.com/diffplug/spotless), a powerful formatting plugin that applies your
+      licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
 
-- Jar bundling and automatic shading with the [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
+- Jar bundling and automatic shading (isolating your dependencies) with the
+  [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
     - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
 
     - The bundled jar is stripped from every unused classes.
+
+- Very easy base configuration :
+
+    - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
+      For example :
+  
+        - Changing `version` in `plugin.json` will change the whole project version.
+
+        - The project is compiled with the version of Mindustry provided by `minGameVersion` in `plugin.json`.
 
 ## Building
 
@@ -35,33 +45,29 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 ## Testing
 
-- `./gradlew runMindustryClient`: Run Mindustry in desktop with the plugin.
+- `./gradlew runMindustryClient`: Run the plugin in a Mindustry client (desktop).
 
-- `./gradlew runMindustryServer`: Run Mindustry in a server with the plugin.
+- `./gradlew runMindustryServer`: Run the plugin in a Mindustry server (headless).
 
 ## Running
 
-This plugin runs on Java 17 and is compatible with Mindustry V6 and V7.
+This plugin compiles to and run on Java 17 and is compatible with Mindustry V6 and V7.
 
 ## Nice tips
 
-- When using this template, don't forget to :
+- If you eventually need to change the project licence (`LICENSE.md` and `LICENSE_HEADER.md`), also change the licence
+  function call in the `indra` configuration of the build script, more info in the
+  [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
-    - Change `plugin.json` and `gradle.properties`.
+- Don't forget to reset `CHANGELOG.md`.
 
-    - Update `LICENSE.md` and `LICENSE_HEADER.md` with your name or replace them with your own license.
-
-      > if you do replace the license, change also the license property in the `indra` configuration of the build
-      script, more info in the
-      [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
-
-    - Reset `CHANGELOG.md`.
-
-- The changelog can be automatically generated to a draft release by the release-drafter workflow using 
+- The changelog can be automatically generated in a draft release by the `release-drafter` workflow using 
   the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) specification.
   When publishing the release, the changelog will be automatically committed to the `CHANGELOG.md` file.
 
-- If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade all your
+  > Be aware that `release-drafter` won't work without an initial release like `0.1.0` or something like that.
+
+- If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade your
   dependencies manually by replacing :
 
   ```gradle
