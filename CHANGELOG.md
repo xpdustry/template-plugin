@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.2.0 - 2022-10-08
+
+### 💊 Bugfixes
+
+- removed initial sha lookup in release-drafter
+
+### 🧹 Chore
+
+- bump dependencies
+- fix ci formatting
+- fix doc changelog
+
 ## v3.1.0 - 2022-05-23
 
 ### 🚀 New Features
