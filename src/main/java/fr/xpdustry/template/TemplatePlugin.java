@@ -28,7 +28,7 @@ package fr.xpdustry.template;
 import arc.util.CommandHandler;
 import arc.util.Log;
 import mindustry.mod.Plugin;
-import org.jetbrains.annotations.NotNull;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Template plugin.
@@ -48,13 +48,13 @@ public class TemplatePlugin extends Plugin {
      * This method is called when the game register the server-side commands.
      */
     @Override
-    public void registerServerCommands(final @NotNull CommandHandler handler) {
+    public void registerServerCommands(final @NonNull CommandHandler handler) {
     }
 
     /**
      * This method is called when the game register the client-side commands.
      */
     @Override
-    public void registerClientCommands(final @NotNull CommandHandler handler) {
+    public void registerClientCommands(final @NonNull CommandHandler handler) {
     }
 }

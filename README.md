@@ -17,33 +17,45 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 - [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster Mindustry plugin
   development and testing.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier project development.
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java project development.
 
-    - It also comes with `indra.licenser-spotless`, an indra extension enabling the usage of [spotless](https://github.com/diffplug/spotless), a powerful formatting plugin that applies your
-      licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
+  - It also comes with `indra.licenser-spotless`, a powerful formatting tool that applies your
+    licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
 
-- Jar bundling and automatic shading (isolating your dependencies) with the
+- Bundling and automatic shading (isolating your dependencies to avoid class loading issues) with the
   [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
-    - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+  - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
 
-    - The bundled jar is stripped from every unused classes.
+  - The bundled jar is stripped from every unused classes.
 
-- Very easy base configuration :
+- Very easy configuration :
 
-    - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
-      For example :
-  
-        - Changing `version` in `plugin.json` will change the whole project version.
+  - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
+    For example :
 
-        - The project is compiled with the version of Mindustry provided by `minGameVersion` in `plugin.json`.
+    - Changing `version` in `plugin.json` will change the whole project version.
+
+    - The project is compiled with the version of Mindustry provided by `minGameVersion` in `plugin.json`.
+
+## How to use
+
+1. Update `plugin.json` and  `gradle.properties`.
+
+2. Reset `CHANGELOG.md`.
+
+3. This is the part you start **K O D I N G**.
+
+4. When ready for release, set the release version in your `plugin.json`, push the change and create a release on 
+   GitHub. Once published, the plugin jar will be added to the release and the `CHANGELOG.md` file will be updated
+   with the release notes.
 
 ## Building
 
 - `./gradlew jar` for a simple jar that contains only the plugin code.
 
-- `./gradlew shadowJar` for a fatJar that contains the plugin and its dependencies (use this for
-  your server).
+- `./gradlew shadowJar` for a fat jar that contains the plugin and its dependencies (use this for
+  your server, it's the jar ending with `-all` in `builds/libs`).
 
 ## Testing
 
@@ -61,17 +73,9 @@ This plugin compiles to and run on Java 17 and is compatible with Mindustry V6 a
   function call in the `indra` configuration of the build script, more info in the
   [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
-- Don't forget to reset `CHANGELOG.md`.
-
-- The changelog can be automatically generated in a draft release by the `release-drafter` workflow using 
-  the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) specification.
-  When publishing the release, the changelog will be automatically committed to the `CHANGELOG.md` file.
-
-  > Be aware that `release-drafter` won't work without an initial release like `0.1.0` or something like that.
-
 - If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade your
   dependencies manually by replacing :
-
+ 
   ```gradle
   val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
       target = tasks.shadowJar.get()
