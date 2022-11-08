@@ -3,7 +3,7 @@
   "displayName": "TemplatePlugin",
   "author": "Xpdustry",
   "description": "A template for faster plugin development.",
-  "version": "3.2.0",
+  "version": "3.3.0",
   "minGameVersion": "126",
   "hidden": true,
   "java": true,

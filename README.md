@@ -27,7 +27,7 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
     - The bundled jar is stripped from every unused classes.
 
-- Very easy base configuration :
+- Very easy configuration :
 
     - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
       For example :
@@ -61,11 +61,7 @@ This plugin compiles to and run on Java 17 and is compatible with Mindustry V6 a
 
 - Don't forget to reset `CHANGELOG.md`.
 
-- The changelog can be automatically generated in a draft release by the `release-drafter` workflow using 
-  the [conventional commit](https://www.conventionalcommits.org/en/v1.0.0/) specification.
-  When publishing the release, the changelog will be automatically committed to the `CHANGELOG.md` file.
-
-  > Be aware that `release-drafter` won't work without an initial release like `0.1.0` or something like that.
+- The changelog is automatically updated when a released is published.
 
 - If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade your
   dependencies manually by replacing :
