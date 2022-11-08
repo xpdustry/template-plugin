@@ -18,7 +18,9 @@ plugins {
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
 group = property("props.project-group").toString()
-metadata.version = metadata.version + if (indraGit.headTag() == null) "-SNAPSHOT" else ""
+if (indraGit.headTag() == null && property("props.enable-snapshots").toString().toBoolean()) {
+    metadata.version += "-SNAPSHOT"
+}
 version = metadata.version
 description = metadata.description
 
