@@ -28,7 +28,7 @@ package fr.xpdustry.template;
 import arc.util.CommandHandler;
 import arc.util.Log;
 import mindustry.mod.Plugin;
-import org.checkerframework.checker.nullness.qual.*;
+import org.checkerframework.checker.nullness.qual.NonNull;
 
 /**
  * Template plugin.

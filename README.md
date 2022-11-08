@@ -17,24 +17,25 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier project development.
 
-    - It also comes with `indra.licenser-spotless`, an indra extension enabling the usage of [spotless](https://github.com/diffplug/spotless), a powerful formatting plugin that applies your
-      licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
+  - It also comes with `indra.licenser-spotless`, an indra extension enabling the usage
+    of [spotless](https://github.com/diffplug/spotless), a powerful formatting plugin that applies your
+    licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
 
 - Jar bundling and automatic shading (isolating your dependencies) with the
   [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
-    - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+  - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
 
-    - The bundled jar is stripped from every unused classes.
+  - The bundled jar is stripped from every unused classes.
 
 - Very easy configuration :
 
-    - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
-      For example :
-  
-        - Changing `version` in `plugin.json` will change the whole project version.
+  - If you're not an advanced user, just editing the properties in `plugin.json` and `gradle.properties` is enough.
+    For example :
 
-        - The project is compiled with the version of Mindustry provided by `minGameVersion` in `plugin.json`.
+    - Changing `version` in `plugin.json` will change the whole project version.
+
+    - The project is compiled with the version of Mindustry provided by `minGameVersion` in `plugin.json`.
 
 ## Building
 
