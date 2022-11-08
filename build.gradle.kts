@@ -7,10 +7,10 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
-    id("net.kyori.indra") version "3.0.0"
-    id("net.kyori.indra.publishing") version "3.0.0"
-    id("net.kyori.indra.git") version "3.0.0"
-    id("net.kyori.indra.licenser.spotless") version "3.0.0"
+    id("net.kyori.indra") version "3.0.1"
+    id("net.kyori.indra.publishing") version "3.0.1"
+    id("net.kyori.indra.git") version "3.0.1"
+    id("net.kyori.indra.licenser.spotless") version "3.0.1"
     id("net.ltgt.errorprone") version "2.0.2"
     id("com.github.johnrengelman.shadow") version "7.1.2"
     id("fr.xpdustry.toxopid") version "2.1.1"
@@ -40,36 +40,44 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
-    val jetbrains = "23.0.0"
-    compileOnly("org.jetbrains:annotations:$jetbrains")
-    testCompileOnly("org.jetbrains:annotations:$jetbrains")
+    val checker = "3.27.0"
+    implementation("org.checkerframework:checker-qual:$checker")
+    testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.10.1")
-    errorprone("com.google.errorprone:error_prone_core:2.15.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.3")
+    errorprone("com.google.errorprone:error_prone_core:2.16")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
     options.errorprone {
         disableWarningsInGeneratedCode.set(true)
-        disable("MissingSummary")
+        disable(
+            "MissingSummary",
+            "FutureReturnValueIgnored",
+            "InlineMeSuggester",
+            "EmptyCatch"
+        )
         if (!name.contains("test", true)) {
             check("NullAway", CheckSeverity.ERROR)
             option("NullAway:AnnotatedPackages", project.property("props.root-package").toString())
+            option("NullAway:TreatGeneratedAsUnannotated", true)
         }
     }
 }
 
-// Disables the signing task, removes this line only if you know what you are doing
-tasks.signMavenPublication.get().enabled = false
+// Disables the signing task, removes this line only if you know how to sign jars
+tasks.signMavenPublication {
+    enabled = false
+}
 
 // Required for the GitHub actions
-tasks.create("getArtifactPath") {
+tasks.register("getArtifactPath") {
     doLast { println(tasks.shadowJar.get().archiveFile.get().toString()) }
 }
 
 // Relocates dependencies
-val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
+val relocate = tasks.register<ConfigureShadowRelocation>("relocateShadowJar") {
     target = tasks.shadowJar.get()
     prefix = project.property("props.root-package").toString() + ".shadow"
 }
@@ -91,7 +99,9 @@ tasks.shadowJar {
     }
 }
 
-tasks.build.get().dependsOn(tasks.shadowJar)
+tasks.build {
+    dependsOn(tasks.shadowJar)
+}
 
 indra {
     javaVersions {
