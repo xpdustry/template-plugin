@@ -7,6 +7,7 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
+    id("com.diffplug.spotless") version "6.11.0"
     id("net.kyori.indra") version "3.0.1"
     id("net.kyori.indra.publishing") version "3.0.1"
     id("net.kyori.indra.git") version "3.0.1"
@@ -140,6 +141,12 @@ indra {
                 }
             }
         }
+    }
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
     }
 }
 

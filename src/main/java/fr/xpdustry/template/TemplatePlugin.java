@@ -48,13 +48,11 @@ public class TemplatePlugin extends Plugin {
      * This method is called when the game register the server-side commands.
      */
     @Override
-    public void registerServerCommands(final @NonNull CommandHandler handler) {
-    }
+    public void registerServerCommands(final @NonNull CommandHandler handler) {}
 
     /**
      * This method is called when the game register the client-side commands.
      */
     @Override
-    public void registerClientCommands(final @NonNull CommandHandler handler) {
-    }
+    public void registerClientCommands(final @NonNull CommandHandler handler) {}
 }
