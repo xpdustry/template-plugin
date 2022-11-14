@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.3.0 - 2022-11-08
+
+### Changes
+
+- Switched the nullness annotations from jetbrains to checker (checker is better).
+
+### Features
+
+- Added option to enable/disable `-SNAPSHOT` suffix.
+
+### Fixes
+
+- Fixes a bug where java 8 is set as the project version.
+
+### Chores
+
+- Bumped workflow tasks.
+- Reworked the `README.md` to be simpler.
+
 ## v3.2.0 - 2022-10-08
 
 ### 💊 Bugfixes
