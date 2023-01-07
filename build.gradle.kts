@@ -26,7 +26,7 @@ description = metadata.description
 
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
-    platforms.add(ModPlatform.HEADLESS)
+    platforms.set(setOf(ModPlatform.HEADLESS))
 }
 
 repositories {
@@ -43,7 +43,7 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
     val checker = "3.27.0"
-    implementation("org.checkerframework:checker-qual:$checker")
+    compileOnly("org.checkerframework:checker-qual:$checker")
     testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
@@ -85,9 +85,15 @@ val relocate = tasks.register<ConfigureShadowRelocation>("relocateShadowJar") {
 }
 
 tasks.shadowJar {
+    // Makes sure the name of the final jar is (plugin-display-name).jar
+    archiveFileName.set(metadata.displayName + ".jar")
+    // Set the classifier to plugin for publication on a maven repository
+    archiveClassifier.set("plugin")
     // Configure the dependencies shading
     dependsOn(relocate)
-    // Reduce shadow jar size by removing unused classes
+    // Reduce shadow jar size by removing unused classes.
+    // Warning, if one of your dependencies use service loaders or reflection, add to the exclude list
+    // such as "minimize { exclude(dependency("some.group:some-dependency:.*")) }"
     minimize()
     // Include the plugin.json file with the modified version
     doFirst {
@@ -102,6 +108,7 @@ tasks.shadowJar {
 }
 
 tasks.build {
+    // Make sure the shadow jar is built during the build task
     dependsOn(tasks.shadowJar)
 }
 
@@ -111,7 +118,9 @@ indra {
         minimumToolchain(17)
     }
 
-    // The license of your project, use gpl3OnlyLicense() if your project is under GPL3
+    // The license of your project, kyori has already functions for the most common licenses
+    // such as gpl3OnlyLicense() for GPLv3, apache2License() for Apache 2.0, etc.
+    // You can still specify your own license using the license { } builder function.
     mitLicense()
 
     if (metadata.repo.isNotBlank()) {
