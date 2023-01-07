@@ -1,8 +1,8 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-import fr.xpdustry.toxopid.ModPlatform
-import fr.xpdustry.toxopid.util.ModMetadata
-import fr.xpdustry.toxopid.util.anukenJitpack
-import fr.xpdustry.toxopid.util.mindustryDependencies
+import fr.xpdustry.toxopid.dsl.anukenJitpack
+import fr.xpdustry.toxopid.dsl.mindustryDependencies
+import fr.xpdustry.toxopid.spec.ModMetadata
+import fr.xpdustry.toxopid.spec.ModPlatform
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
@@ -12,9 +12,9 @@ plugins {
     id("net.kyori.indra.publishing") version "3.0.1"
     id("net.kyori.indra.git") version "3.0.1"
     id("net.kyori.indra.licenser.spotless") version "3.0.1"
-    id("net.ltgt.errorprone") version "2.0.2"
+    id("net.ltgt.errorprone") version "3.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("fr.xpdustry.toxopid") version "2.1.1"
+    id("fr.xpdustry.toxopid") version "3.0.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
@@ -27,7 +27,7 @@ description = metadata.description
 
 toxopid {
     compileVersion.set("v" + metadata.minGameVersion)
-    platforms.add(ModPlatform.HEADLESS)
+    platforms.set(setOf(ModPlatform.HEADLESS))
 }
 
 repositories {
@@ -44,12 +44,12 @@ dependencies {
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
     val checker = "3.27.0"
-    implementation("org.checkerframework:checker-qual:$checker")
+    compileOnly("org.checkerframework:checker-qual:$checker")
     testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.10.3")
-    errorprone("com.google.errorprone:error_prone_core:2.16")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.6")
+    errorprone("com.google.errorprone:error_prone_core:2.17.0")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {
@@ -81,9 +81,15 @@ val relocate = tasks.register<ConfigureShadowRelocation>("relocateShadowJar") {
 }
 
 tasks.shadowJar {
+    // Makes sure the name of the final jar is (plugin-display-name).jar
+    archiveFileName.set(metadata.displayName + ".jar")
+    // Set the classifier to plugin for publication on a maven repository
+    archiveClassifier.set("plugin")
     // Configure the dependencies shading
     dependsOn(relocate)
-    // Reduce shadow jar size by removing unused classes
+    // Reduce shadow jar size by removing unused classes.
+    // Warning, if one of your dependencies use service loaders or reflection, add to the exclude list
+    // such as "minimize { exclude(dependency("some.group:some-dependency:.*")) }"
     minimize()
     // Include the plugin.json file with the modified version
     doFirst {
@@ -98,6 +104,7 @@ tasks.shadowJar {
 }
 
 tasks.build {
+    // Make sure the shadow jar is built during the build task
     dependsOn(tasks.shadowJar)
 }
 
@@ -116,7 +123,9 @@ indra {
     publishSnapshotsTo("xpdustry", "https://maven.xpdustry.fr/snapshots")
     publishReleasesTo("xpdustry", "https://maven.xpdustry.fr/releases")
 
-    // The license of your project, use gpl3OnlyLicense() if your project is under GPL3
+    // The license of your project, kyori has already functions for the most common licenses
+    // such as gpl3OnlyLicense() for GPLv3, apache2License() for Apache 2.0, etc.
+    // You can still specify your own license using the license { } builder function.
     mitLicense()
 
     if (metadata.repo.isNotBlank()) {
