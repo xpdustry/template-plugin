@@ -8,8 +8,6 @@
 
 Get your Mindustry plugin started with this awesome template repository, it features :
 
-- [Jitpack](https://jitpack.io/) support for using the project as a dependency.
-
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
 - [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster Mindustry plugin
