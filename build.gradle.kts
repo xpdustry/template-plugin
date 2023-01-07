@@ -1,8 +1,8 @@
 import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-import fr.xpdustry.toxopid.ModPlatform
-import fr.xpdustry.toxopid.util.ModMetadata
-import fr.xpdustry.toxopid.util.anukenJitpack
-import fr.xpdustry.toxopid.util.mindustryDependencies
+import fr.xpdustry.toxopid.dsl.anukenJitpack
+import fr.xpdustry.toxopid.dsl.mindustryDependencies
+import fr.xpdustry.toxopid.spec.ModMetadata
+import fr.xpdustry.toxopid.spec.ModPlatform
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
@@ -11,9 +11,9 @@ plugins {
     id("net.kyori.indra.publishing") version "3.0.1"
     id("net.kyori.indra.git") version "3.0.1"
     id("net.kyori.indra.licenser.spotless") version "3.0.1"
-    id("net.ltgt.errorprone") version "2.0.2"
+    id("net.ltgt.errorprone") version "3.0.1"
     id("com.github.johnrengelman.shadow") version "7.1.2"
-    id("fr.xpdustry.toxopid") version "2.1.1"
+    id("fr.xpdustry.toxopid") version "3.0.0"
 }
 
 val metadata = ModMetadata.fromJson(file("plugin.json").readText())
@@ -47,8 +47,8 @@ dependencies {
     testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.10.3")
-    errorprone("com.google.errorprone:error_prone_core:2.16")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.6")
+    errorprone("com.google.errorprone:error_prone_core:2.17.0")
 }
 
 tasks.withType(JavaCompile::class.java).configureEach {

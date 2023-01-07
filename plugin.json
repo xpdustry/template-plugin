@@ -4,7 +4,7 @@
   "author": "Xpdustry",
   "description": "A template for faster plugin development.",
   "version": "3.3.0",
-  "minGameVersion": "126",
+  "minGameVersion": "140",
   "hidden": true,
   "java": true,
   "main": "fr.xpdustry.template.TemplatePlugin",
