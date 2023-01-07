@@ -156,6 +156,18 @@ indra {
 spotless {
     java {
         palantirJavaFormat()
+        formatAnnotations()
+        importOrderFile(rootProject.file(".spotless/project.importorder"))
+        custom("noWildcardImports") {
+            if (it.contains("*;\n")) {
+                throw Error("No wildcard imports allowed")
+            }
+            it
+        }
+        bumpThisNumberIfACustomStepChanges(1)
+    }
+    kotlinGradle {
+        ktlint()
     }
 }
 
