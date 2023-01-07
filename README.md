@@ -2,32 +2,30 @@
 
 [![Xpdustry latest](https://repo.xpdustry.fr/api/badge/latest/snapshots/fr/xpdustry/template-plugin?color=00FFFF&name=TemplatePlugin&prefix=v)](https://github.com/Xpdustry/TemplatePlugin/releases)
 [![Build status](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml)
-[![Mindustry 6.0 | 7.0 ](https://img.shields.io/badge/Mindustry-6.0%20%7C%207.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
-
-## Description
+[![Mindustry 7.0 ](https://img.shields.io/badge/Mindustry-7.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
 
 **Xpdustry variation for publishing packages to our repo.**
 
 Get your Mindustry plugin started with this awesome template repository, it features :
 
-- [Jitpack](https://jitpack.io/) support for using the project as a library.
+- [Jitpack](https://jitpack.io/) support for using the project as a dependency.
 
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
 - [Toxopid](https://plugins.gradle.org/plugin/fr.xpdustry.toxopid) Gradle plugin for faster Mindustry plugin
   development and testing.
 
-- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java project development.
+- [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java development.
 
   - It also comes with `indra.licenser-spotless`, a powerful formatting tool that applies your
     licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
 
-- Bundling and automatic shading (isolating your dependencies to avoid class loading issues) with the
+- Bundling and automatic relocation (isolating your dependencies to avoid class loading issues) with the
   [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
-  - The default shaded dependencies location is `(rootpackage).shadow` (example: `fr.xpdustry.template.shadow`).
+  - The default relocation is `(plugin-root-package).shadow` (example with gson: `fr.xpdustry.template.shadow.gson`).
 
-  - The bundled jar is stripped from every unused classes.
+  - Every unused classes is removed from the final jar.
 
 - Very easy configuration :
 
@@ -44,38 +42,40 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 2. Reset `CHANGELOG.md`.
 
-3. This is the part you start **K O D I N G**.
+3. Start **K O D I N G**.
 
-4. When ready for release, set the release version in your `plugin.json`, push the change and create a release on 
+4. When ready for release, set the release version in your `plugin.json`, push the change and create a release on
    GitHub. Once published, the plugin jar will be added to the release and the `CHANGELOG.md` file will be updated
-   with the release notes.
+   with the release notes of the release.
+
+## Installation
+
+This plugin requires :
+
+- Java 17 or above.
+
+- Mindustry v140 or above.
 
 ## Building
 
-- `./gradlew jar` for a simple jar that contains only the plugin code.
+- `./gradlew shadowJar` to compile the plugin into a usable jar (will be located
+  at `builds/libs/(plugin-display-name.jar`).
 
-- `./gradlew shadowJar` for a fat jar that contains the plugin and its dependencies (use this for
-  your server, it's the jar ending with `-all` in `builds/libs`).
+- `./gradlew jar` for a plain jar that contains only the plugin code.
 
-## Testing
+- `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
 
-- `./gradlew runMindustryClient`: Run the plugin in a Mindustry client (desktop).
+- `./gradlew test` to run the unit tests of the plugin.
 
-- `./gradlew runMindustryServer`: Run the plugin in a Mindustry server (headless).
-
-## Running
-
-This plugin compiles to and run on Java 17 and is compatible with Mindustry V6 and V7.
-
-## Nice tips
+## Notes
 
 - If you eventually need to change the project licence (`LICENSE.md` and `LICENSE_HEADER.md`), also change the licence
   function call in the `indra` configuration of the build script, more info in the
   [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
 
-- If you want to expose some of your plugin dependencies, or you are using SQL drivers, you will have to shade your
-  dependencies manually by replacing :
- 
+- If you want to expose some of your plugin dependencies, or you are using a dependency that cannot be relocated like
+  some SQL drivers, you will have to relocate them manually by replacing :
+
   ```gradle
   val relocate = tasks.create<ConfigureShadowRelocation>("relocateShadowJar") {
       target = tasks.shadowJar.get()
@@ -97,7 +97,7 @@ This plugin compiles to and run on Java 17 and is compatible with Mindustry V6 a
       relocate("com.example.artifact1", "$shadowPackage.artifact1")
       relocate("com.example.artifact2", "$shadowPackage.artifact2")
       minimize {
-          // Put the exposed dependencies and sql drivers here
+          // Put the exposed dependencies and unrelocatable dependencies here
           exclude(dependency("com.example:artifact3:.*"))
           exclude(dependency("com.example:some-sql-driver:.*"))
       }
