@@ -1,12 +1,9 @@
 # TemplatePlugin
 
-[![Jitpack latest version](https://jitpack.io/v/fr.xpdustry/TemplatePlugin.svg)](https://jitpack.io/#fr.xpdustry/TemplatePlugin)
 [![Build status](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml)
 [![Mindustry 7.0 ](https://img.shields.io/badge/Mindustry-7.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
 
 Get your Mindustry plugin started with this awesome template repository, it features :
-
-- [Jitpack](https://jitpack.io/) support for using the project as a dependency.
 
 - GitHub actions for easier testing (the plugin is built for each commit and pull request).
 
