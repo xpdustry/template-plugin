@@ -1,4 +1,4 @@
-# TemplatePlugin
+# template-plugin
 
 [![Xpdustry latest](https://maven.xpdustry.com/api/badge/latest/releases/com/xpdustry/template?color=00FFFF&name=template-plugin&prefix=v)](https://github.com/xpdustry/template-plugin/releases)
 [![Build status](https://github.com/xpdustry/template-plugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/xpdustry/template-plugin/actions/workflows/build.yml)
@@ -30,6 +30,8 @@ Get your Mindustry plugin started with this awesome template repository, it feat
   - Unused classes are removed from the final jar.
 
 - The build script contains a lot of comments to help you understand what is going on.
+
+- A `CHANGELOG.md` file that will be updated automatically when you create a release on GitHub.
 
 ## How to use
 
