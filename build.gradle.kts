@@ -163,7 +163,10 @@ tasks.shadowJar {
     archiveFileName.set("${metadata.displayName}.jar")
     // Set the classifier to plugin for publication on a maven repository
     archiveClassifier.set("plugin")
-    // Configure the dependencies shading
+    // Configure the dependencies shading.
+    // WARNING: SQL drivers do not play well with shading,
+    // the best solution would be to load them in an isolated classloader.
+    // If it's too difficult, you can disable relocation but be aware this can conflict with other plugins.
     isEnableRelocation = true
     relocationPrefix = "$rootPackage.shadow"
     // Reduce shadow jar size by removing unused classes.
