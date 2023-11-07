@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/),
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## v3.5.0 - 2023-11-07
+
+### Changes
+
+- Complete refresh of the template to be up to date.
+- Made the README simpler.
+- Moved all configuration inside buildscript instead of being split into several files.
+
 ## v3.4.0 - 2023-01-07
 
 ### Changes
