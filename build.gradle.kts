@@ -59,17 +59,17 @@ dependencies {
     mindustryDependencies()
     compileOnly("fr.xpdustry:distributor-api:3.2.0")
 
-    val junit = "5.10.0"
+    val junit = "5.10.1"
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
-    val checker = "3.39.0"
+    val checker = "3.40.0"
     compileOnly("org.checkerframework:checker-qual:$checker")
     testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.10.15")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.16")
     errorprone("com.google.errorprone:error_prone_core:2.23.0")
 }
 
