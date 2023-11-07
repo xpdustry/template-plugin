@@ -1,10 +1,10 @@
 # TemplatePlugin
 
 [![Xpdustry latest](https://maven.xpdustry.com/api/badge/latest/releases/com/xpdustry/template?color=00FFFF&name=template-plugin&prefix=v)](https://github.com/xpdustry/template-plugin/releases)
-[![Build status](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/Xpdustry/TemplatePlugin/actions/workflows/build.yml)
+[![Build status](https://github.com/xpdustry/template-plugin/actions/workflows/build.yml/badge.svg?branch=master&event=push)](https://github.com/xpdustry/template-plugin/actions/workflows/build.yml)
 [![Mindustry 7.0 ](https://img.shields.io/badge/Mindustry-7.0-ffd37f)](https://github.com/Anuken/Mindustry/releases)
 
-**Xpdustry variation for publishing packages to our repo.**
+**Xpdustry variation for publishing packages to our maven repo.**
 
 Get your Mindustry plugin started with this awesome template repository, it features :
 

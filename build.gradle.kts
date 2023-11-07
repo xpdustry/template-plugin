@@ -144,7 +144,6 @@ indraSpotlessLicenser {
     property("YEAR", "2023")
 }
 
-
 tasks.withType<JavaCompile> {
     options.errorprone {
         disableWarningsInGeneratedCode.set(true)
