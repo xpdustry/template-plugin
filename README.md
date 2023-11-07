@@ -12,23 +12,27 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java development.
 
-  - It also comes with `indra.licenser-spotless`, a powerful formatting tool that applies your
-    licence header automatically in your source files with the `./gradlew spotlessApply` task (and much more).
+- [Spotless](https://plugins.gradle.org/plugin/com.diffplug.spotless) Gradle plugin for code formatting.
+
+  - It is set up to use palantir java format, a very good code formatter balanced between google and intellij codestyle.
+
+  - Indra also comes with `indra.licenser-spotless`, a simple tool that will add your licence header automatically in your source files.
+
+- [Ben Manes' Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin) for keeping your
+  dependencies up to date.
 
 - Bundling and automatic relocation (isolating your dependencies to avoid class loading issues) with the
   [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
-  - The default relocation is `(plugin-root-package).shadow` (example with gson: `fr.xpdustry.template.shadow.gson`).
-
   - Unused classes are removed from the final jar.
 
-- Very easy configuration :
+- The build script contains a lot of comments to help you understand what is going on.
 
 ## How to use
 
 1. Update the `build.gradle.kts` file with your plugin data.
 
-2. Clear `CHANGELOG.md`.
+2. Clear `CHANGELOG.md` and update `LICENSE.md` with your name.
 
 3. Start **K O D I N G**.
 
@@ -45,14 +49,14 @@ This plugin requires :
 ## Building
 
 - `./gradlew shadowJar` to compile the plugin into a usable jar (will be located
-  at `builds/libs/(plugin-display-name).jar`).
+  at `builds/libs/(plugin-name).jar`).
 
 - `./gradlew jar` for a plain jar that contains only the plugin code.
 
 - `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
 
-## Notes
+- `./gradlew runMindustryClient` to start a local Mindustry client that will let you test the plugin.
 
-- If you eventually need to change the project licence (`LICENSE.md` and `LICENSE_HEADER.md`), also change the licence
-  function call in the `indra` configuration of the build script, more info in the
-  [Indra wiki](https://github.com/KyoriPowered/indra/wiki/indra-publishing#indra-extension-properties-and-methods).
+- `./gradlew spotlessApply` to apply the code formatting and the licence header.
+
+- `./gradlew dependencyUpdates` to check for dependency updates.

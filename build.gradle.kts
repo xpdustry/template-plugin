@@ -159,8 +159,8 @@ tasks.register("getArtifactPath") {
 }
 
 tasks.shadowJar {
-    // Makes sure the name of the final jar is (plugin-display-name).jar
-    archiveFileName.set("${metadata.displayName}.jar")
+    // Makes sure the name of the final jar is (plugin-name).jar
+    archiveFileName.set("${metadata.name}.jar")
     // Set the classifier to plugin for publication on a maven repository
     archiveClassifier.set("plugin")
     // Configure the dependencies shading.
