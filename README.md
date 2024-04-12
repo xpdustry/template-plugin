@@ -60,5 +60,3 @@ This plugin requires :
 - `./gradlew runMindustryClient` to start a local Mindustry client that will let you test the plugin.
 
 - `./gradlew spotlessApply` to apply the code formatting and the licence header.
-
-- `./gradlew dependencyUpdates` to check for dependency updates.

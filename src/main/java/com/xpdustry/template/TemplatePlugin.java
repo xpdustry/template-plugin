@@ -25,63 +25,16 @@
  */
 package com.xpdustry.template;
 
-import arc.util.CommandHandler;
-import cloud.commandframework.arguments.standard.StringArgument;
-import cloud.commandframework.meta.CommandMeta;
-import fr.xpdustry.distributor.api.command.ArcCommandManager;
-import fr.xpdustry.distributor.api.command.sender.CommandSender;
-import fr.xpdustry.distributor.api.event.EventHandler;
-import fr.xpdustry.distributor.api.plugin.AbstractMindustryPlugin;
-import fr.xpdustry.distributor.api.plugin.PluginListener;
-import fr.xpdustry.distributor.api.scheduler.MindustryTimeUnit;
-import fr.xpdustry.distributor.api.scheduler.TaskHandler;
-import mindustry.game.EventType;
-import mindustry.gen.Groups;
+import arc.util.Log;
 
 /**
  * Template plugin.
  */
 @SuppressWarnings("unused")
-public final class TemplatePlugin extends AbstractMindustryPlugin {
-
-    private final ArcCommandManager<CommandSender> clientCommandManager = ArcCommandManager.standard(this);
+public final class TemplatePlugin extends Plugin {
 
     @Override
-    public void onInit() {
-        this.getLogger().info("Bonjour");
-        this.addListener(new PlayerListener());
-    }
-
-    @Override
-    public void onClientCommandsRegistration(final CommandHandler handler) {
-        this.clientCommandManager.initialize(handler);
-        this.clientCommandManager.command(this.clientCommandManager
-                .commandBuilder("echo")
-                .meta(CommandMeta.DESCRIPTION, "Print something")
-                .argument(StringArgument.of("message"))
-                .handler(context -> {
-                    final String message = context.get("message");
-                    context.getSender().sendMessage(message);
-                }));
-    }
-
-    @Override
-    public void onExit() {
-        this.getLogger().info("Au revoir");
-    }
-
-    public static final class PlayerListener implements PluginListener {
-
-        @EventHandler
-        public void onPlayerJoin(final EventType.PlayerJoin event) {
-            event.player.sendMessage("Welcome to the server!");
-        }
-
-        @TaskHandler(interval = 5, unit = MindustryTimeUnit.MINUTES)
-        public void onPlayerTask() {
-            Groups.player.forEach(player -> {
-                player.sendMessage("Don't forget to join our discord!");
-            });
-        }
+    public void init() {
+        Log.info("Hello Template");
     }
 }

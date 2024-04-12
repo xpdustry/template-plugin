@@ -1,7 +1,6 @@
 import fr.xpdustry.toxopid.dsl.mindustryDependencies
 import fr.xpdustry.toxopid.spec.ModMetadata
 import fr.xpdustry.toxopid.spec.ModPlatform
-import fr.xpdustry.toxopid.task.GithubArtifactDownload
 import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
@@ -17,20 +16,7 @@ plugins {
     id("com.github.ben-manes.versions") version "0.50.0"
 }
 
-val metadata =
-    ModMetadata(
-        name = "template",
-        displayName = "TemplatePlugin",
-        author = "Xpdustry",
-        description = "A template plugin for Mindustry to get you started quickly.",
-        version = "3.5.1",
-        minGameVersion = "146",
-        hidden = true,
-        java = true,
-        main = "com.xpdustry.template.TemplatePlugin",
-        repo = "xpdustry/template-plugin",
-        dependencies = mutableListOf("distributor-core"),
-    )
+val metadata = ModMetadata.fromJson(rootProject.file("plugin.json"))
 
 // Remove the following line if you don't want snapshot versions
 if (indraGit.headTag() == null) {
@@ -188,16 +174,4 @@ tasks.shadowJar {
 tasks.build {
     // Make sure the shadow jar is built during the build task
     dependsOn(tasks.shadowJar)
-}
-
-val downloadDistributorCore =
-    tasks.register<GithubArtifactDownload>("downloadDistributorCore") {
-        user.set("xpdustry")
-        repo.set("distributor")
-        version.set("v3.2.0")
-        name.set("distributor-core.jar")
-    }
-
-tasks.runMindustryServer {
-    mods.setFrom(tasks.shadowJar, downloadDistributorCore)
 }
