@@ -5,7 +5,7 @@ import net.ltgt.gradle.errorprone.CheckSeverity
 import net.ltgt.gradle.errorprone.errorprone
 
 plugins {
-    id("com.diffplug.spotless") version "6.23.3"
+    id("com.diffplug.spotless") version "6.25.0"
     id("net.kyori.indra") version "3.1.3"
     id("net.kyori.indra.publishing") version "3.1.3"
     id("net.kyori.indra.git") version "3.1.3"
@@ -13,7 +13,7 @@ plugins {
     id("net.ltgt.errorprone") version "3.1.0"
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("fr.xpdustry.toxopid") version "3.2.0"
-    id("com.github.ben-manes.versions") version "0.50.0"
+    id("com.github.ben-manes.versions") version "0.51.0"
 }
 
 val metadata = ModMetadata.fromJson(rootProject.file("plugin.json"))
@@ -43,20 +43,19 @@ repositories {
 
 dependencies {
     mindustryDependencies()
-    compileOnly("fr.xpdustry:distributor-api:3.2.1")
 
-    val junit = "5.10.1"
+    val junit = "5.10.2"
     testImplementation("org.junit.jupiter:junit-jupiter-params:$junit")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$junit")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junit")
 
-    val checker = "3.41.0"
+    val checker = "3.42.0"
     compileOnly("org.checkerframework:checker-qual:$checker")
     testImplementation("org.checkerframework:checker-qual:$checker")
 
     // Static analysis
-    annotationProcessor("com.uber.nullaway:nullaway:0.10.18")
-    errorprone("com.google.errorprone:error_prone_core:2.23.0")
+    annotationProcessor("com.uber.nullaway:nullaway:0.10.25")
+    errorprone("com.google.errorprone:error_prone_core:2.26.1")
 }
 
 indra {
