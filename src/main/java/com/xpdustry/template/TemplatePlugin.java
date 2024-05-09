@@ -26,6 +26,7 @@
 package com.xpdustry.template;
 
 import arc.util.Log;
+import mindustry.mod.Plugin;
 
 /**
  * Template plugin.
