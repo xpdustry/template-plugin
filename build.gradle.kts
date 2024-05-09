@@ -113,7 +113,7 @@ spotless {
 }
 
 indraSpotlessLicenser {
-    licenseHeaderFile(rootProject.file("LICENSE_HEADER.md"))
+    licenseHeaderFile(rootProject.file("HEADER.md"))
     // Some properties to make updating the licence header easier
     property("NAME", metadata.displayName)
     property("DESCRIPTION", metadata.description)
