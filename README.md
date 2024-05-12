@@ -12,15 +12,6 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java development.
 
-- [Spotless](https://plugins.gradle.org/plugin/com.diffplug.spotless) Gradle plugin for code formatting.
-
-  - It is set up to use palantir java format, a very good code formatter balanced between google and intellij codestyle.
-
-  - Indra also comes with `indra.licenser-spotless`, a simple tool that will add your licence header automatically in your source files.
-
-- [Ben Manes' Gradle Versions Plugin](https://github.com/ben-manes/gradle-versions-plugin) for keeping your
-  dependencies up to date.
-
 - Bundling and automatic relocation (isolating your dependencies to avoid class loading issues) with the
   [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
@@ -32,7 +23,7 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 ## How to use
 
-1. Update the `build.gradle.kts` file with your plugin data.
+1. Update the `build.gradle.kts`, `settings.gradle.kts` and `plugin.json` files with your plugin data.
 
 2. Clear `CHANGELOG.md` and update `LICENSE.md` with your name.
 
@@ -58,5 +49,3 @@ This plugin requires :
 - `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
 
 - `./gradlew runMindustryClient` to start a local Mindustry client that will let you test the plugin.
-
-- `./gradlew spotlessApply` to apply the code formatting and the licence header.
