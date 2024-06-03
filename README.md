@@ -45,3 +45,18 @@ This plugin requires :
 - `./gradlew runMindustryServer` to run the plugin in a local Mindustry server.
 
 - `./gradlew runMindustryDesktop` to start a local Mindustry client that will let you test the plugin.
+
+## Note
+
+If you are from Xpdustry, before doing anything, run this in your terminal to set the `xpdustry-master` branch as master :
+
+```bash
+git fetch origin xpdustry-master
+git checkout xpdustry-master
+git branch -m master old-master
+git branch -m xpdustry-master master
+git branch -rD origin/master
+git push origin master -f
+git branch -D old-master
+git push origin --delete xpdustry-master
+```
