@@ -71,10 +71,8 @@ tasks.shadowJar {
     minimize()
 }
 
-tasks.register("release") {
+tasks.register<Copy>("release") {
     dependsOn(tasks.build)
-    project.copy {
-        from(tasks.shadowJar)
-        into(temporaryDir)
-    }
+    from(tasks.shadowJar)
+    into(temporaryDir)
 }
