@@ -17,7 +17,7 @@ plugins {
 
 val metadata = ModMetadata.fromJson(rootProject.file("plugin.json"))
 group = "com.xpdustry"
-val rootPackage = "com.xpdustry.${metadata.name}"
+val rootPackage = "com.xpdustry.template"
 version = metadata.version
 description = metadata.description
 
@@ -79,6 +79,19 @@ indra {
                 url.set("https://www.xpdustry.com")
             }
         }
+    }
+}
+
+spotless {
+    java {
+        palantirJavaFormat()
+        importOrder("", "\\#")
+        custom("no-wildcard-imports") { it.apply { if (contains("*;\n")) error("No wildcard imports allowed") } }
+        licenseHeaderFile(rootProject.file("HEADER.txt"))
+        bumpThisNumberIfACustomStepChanges(1)
+    }
+    kotlinGradle {
+        ktlint()
     }
 }
 
