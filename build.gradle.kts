@@ -16,6 +16,7 @@ plugins {
 }
 
 val metadata = ModMetadata.fromJson(rootProject.file("plugin.json"))
+if (indraGit.headTag() == null) metadata.version += "-SNAPSHOT"
 group = "com.xpdustry"
 val rootPackage = "com.xpdustry.template"
 version = metadata.version
@@ -29,6 +30,10 @@ toxopid {
 repositories {
     mavenCentral()
     anukeXpdustry()
+    maven("https://maven.xpdustry.com/releases") {
+        name = "xpdustry-releases"
+        mavenContent { releasesOnly() }
+    }
 }
 
 dependencies {
@@ -75,8 +80,8 @@ indra {
     configurePublications {
         pom {
             organization {
-                name.set("xpdustry")
-                url.set("https://www.xpdustry.com")
+                name = "xpdustry"
+                url = "https://www.xpdustry.com"
             }
         }
     }
