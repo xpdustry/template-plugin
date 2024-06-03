@@ -9,6 +9,5 @@ toxopid = "4.0.0"
 
 [plugins]
 indra-common = { id = "net.kyori.indra", version.ref = "indra" }
-indra-git = { id = "net.kyori.indra.git", version.ref = "indra" }
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
 toxopid = { id = "com.xpdustry.toxopid", version.ref = "toxopid" }

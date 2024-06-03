@@ -4,7 +4,6 @@ import com.xpdustry.toxopid.spec.ModPlatform
 
 plugins {
     alias(libs.plugins.indra.common)
-    alias(libs.plugins.indra.git)
     alias(libs.plugins.shadow)
     alias(libs.plugins.toxopid)
 }
@@ -50,7 +49,7 @@ indra {
         pom {
             developers {
                 developer {
-                    id.set(metadata.author)
+                    id = metadata.author
                 }
             }
         }
