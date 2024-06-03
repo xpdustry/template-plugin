@@ -43,6 +43,7 @@ jobs:
         with:
           name: "${{ github.event.repository.name }}-artifacts"
           path: build/tmp/release/*.jar
+          if-no-files-found: error
 
       - name: Determine Status
         run: |

@@ -10,14 +10,13 @@ plugins {
 }
 
 val metadata = ModMetadata.fromJson(rootProject.file("plugin.json"))
-
 group = "com.xpdustry"
 version = metadata.version
 description = metadata.description
 
 toxopid {
-    compileVersion.set("v${metadata.minGameVersion}")
-    platforms.set(setOf(ModPlatform.SERVER))
+    compileVersion = "v${metadata.minGameVersion}"
+    platforms = setOf(ModPlatform.SERVER)
 }
 
 repositories {
@@ -66,8 +65,8 @@ val generateResources by tasks.registering {
 }
 
 tasks.shadowJar {
-    archiveFileName.set("${metadata.name}.jar")
-    archiveClassifier.set("plugin")
+    archiveFileName = "${metadata.name}.jar"
+    archiveClassifier = "plugin"
     from(generateResources)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
     minimize()
