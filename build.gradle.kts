@@ -56,17 +56,19 @@ indra {
     }
 }
 
-val generateResources by tasks.registering {
-    outputs.files(fileTree(temporaryDir))
+val generateMetadataFile by tasks.registering {
+    inputs.property("metadata", metadata)
+    val output = temporaryDir.resolve("plugin.json")
+    outputs.file(output)
     doLast {
-        temporaryDir.resolve("plugin.json").writeText(ModMetadata.toJson(metadata))
+        output.writeText(ModMetadata.toJson(metadata))
     }
 }
 
 tasks.shadowJar {
     archiveFileName = "${metadata.name}.jar"
     archiveClassifier = "plugin"
-    from(generateResources)
+    from(generateMetadataFile)
     from(rootProject.file("LICENSE.md")) { into("META-INF") }
     minimize()
 }
@@ -74,5 +76,5 @@ tasks.shadowJar {
 tasks.register<Copy>("release") {
     dependsOn(tasks.build)
     from(tasks.shadowJar)
-    into(temporaryDir)
+    destinationDir = temporaryDir
 }
