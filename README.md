@@ -12,10 +12,11 @@ Get your Mindustry plugin started with this awesome template repository, it feat
 
 - [Indra](https://plugins.gradle.org/plugin/net.kyori.indra) Gradle plugin for easier java development.
 
-- Bundling and automatic relocation (isolating your dependencies to avoid class loading issues) with the
-  [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
+- Bundling and automatic relocation with the [Shadow](https://imperceptiblethoughts.com/shadow/) gradle plugin.
 
   - Unused classes are removed from the final jar.
+
+  - **NOTE:** shadow is no longer maintained, it has been replaced by a [fork](https://github.com/Goooler/shadow) from one of the major contributors.
 
 - A `CHANGELOG.md` file that will be updated automatically when you create a release on GitHub.
 
