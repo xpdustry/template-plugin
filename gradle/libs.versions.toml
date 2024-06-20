@@ -10,7 +10,8 @@ spotless = "6.25.0"
 errorprone-gradle = "4.0.0"
 
 # utilities
-distributor = "4.0.0-beta.3"
+slf4md = "1.0.0"
+distributor = "4.0.0-rc.1"
 
 # testing
 junit = "5.10.2"
@@ -18,7 +19,7 @@ junit = "5.10.2"
 # static analysis
 errorprone-core = "2.28.0"
 nullaway = "0.11.0"
-checker-qual = "3.43.0"
+checker-qual = "3.44.0"
 
 [libraries]
 # utilities

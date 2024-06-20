@@ -90,6 +90,7 @@ indra {
 spotless {
     java {
         palantirJavaFormat()
+        formatAnnotations()
         importOrder("", "\\#")
         custom("no-wildcard-imports") { it.apply { if (contains("*;\n")) error("No wildcard imports allowed") } }
         licenseHeaderFile(rootProject.file("HEADER.txt"))
@@ -135,11 +136,11 @@ tasks.withType<JavaCompile> {
     }
 }
 
-val downloadDistributorLoggingSimple by tasks.registering(GithubAssetDownload::class) {
+val downloadSlf4md by tasks.registering(GithubAssetDownload::class) {
     owner = "xpdustry"
-    repo = "distributor"
-    asset = "distributor-logging-simple.jar"
-    version = "v${libs.versions.distributor.get()}"
+    repo = "slf4md"
+    asset = "slf4md-simple.jar"
+    version = "v${libs.versions.slf4md.get()}"
 }
 
 val downloadDistributorCommon by tasks.registering(GithubAssetDownload::class) {
@@ -150,5 +151,5 @@ val downloadDistributorCommon by tasks.registering(GithubAssetDownload::class) {
 }
 
 tasks.runMindustryServer {
-    mods.from(downloadDistributorLoggingSimple, downloadDistributorCommon)
+    mods.from(downloadSlf4md, downloadDistributorCommon)
 }
