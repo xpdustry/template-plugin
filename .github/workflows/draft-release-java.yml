@@ -12,7 +12,7 @@ jobs:
   invoke:
     uses: xpdustry/.github/.github/workflows/draft-release-java.yaml@master
     with:
-      java_version: 25
+      java_version: 17
       draft_version: ${{ github.event.inputs.draft_version || '' }}
     permissions:
       contents: write
