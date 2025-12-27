@@ -1,0 +1,20 @@
+name: Draft Release (Java)
+
+on:
+  workflow_dispatch:
+    inputs:
+      draft_version:
+        description: "Force a specific version (e.g. 4.0.0)"
+        type: string
+        required: false
+
+jobs:
+  invoke:
+    uses: xpdustry/.github/.github/workflows/draft-release-java.yaml@master
+    with:
+      java_version: 25
+      draft_version: ${{ github.event.inputs.draft_version || '' }}
+    permissions:
+      contents: write
+      pull-requests: read
+    secrets: "inherit"
