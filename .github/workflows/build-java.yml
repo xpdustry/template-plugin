@@ -16,5 +16,6 @@ jobs:
       artifacts_path: build/tmp/release/*.jar
       version_file: plugin.json
       version_file_kind: mindustry-mod
+      publish_maven: false
       build_command: "release"
     secrets: "inherit"
