@@ -12,7 +12,7 @@ jobs:
   build:
     uses: xpdustry/.github/.github/workflows/build-java.yaml@master
     with:
-      java_version: 25
+      java_version: 17
       artifacts_path: build/tmp/release/*.jar
       version_file: plugin.json
       version_file_kind: mindustry-mod
